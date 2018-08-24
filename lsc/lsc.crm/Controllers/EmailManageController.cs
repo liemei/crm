@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using bnuxq.Bll;
-using bnuxq.crm.ViewModel;
-using bnuxq.Common;
-using bnuxq.Model;
+using lsc.Bll;
+using lsc.crm.ViewModel;
+using lsc.Common;
+using lsc.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace bnuxq.crm.Controllers
+namespace lsc.crm.Controllers
 {
     public class EmailManageController : BaseController
     {

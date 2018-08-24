@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
-using bnuxq.Common;
+using lsc.Common;
 
-namespace bnuxq.crm.Filter
+namespace lsc.crm.Filter
 {
     public class UserLoginFilter:ActionFilterAttribute
     {

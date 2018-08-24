@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace bnuxq.Model
+namespace lsc.Model
 {
     /// <summary>
     /// 销售项目回款记录

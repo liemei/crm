@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using bnuxq.Common;
+using lsc.Common;
 using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using OfficeOpenXml;
-using bnuxq.Bll;
-using bnuxq.Model;
+using lsc.Bll;
+using lsc.Model;
 
-namespace bnuxq.crm.Controllers
+namespace lsc.crm.Controllers
 {
     public class UploadApiController : Controller
     {

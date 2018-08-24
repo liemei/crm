@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Code\\Net\\crm\\lsc\\lsc.Model\\lsc.Model.csproj",
+      "projectUniqueName": "D:\\Code\\crm\\lsc\\lsc.Model\\lsc.Model.csproj",
       "projectName": "lsc.Model",
-      "projectPath": "D:\\Code\\Net\\crm\\lsc\\lsc.Model\\lsc.Model.csproj",
+      "projectPath": "D:\\Code\\crm\\lsc\\lsc.Model\\lsc.Model.csproj",
       "packagesPath": "C:\\Users\\lsc\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\Net\\crm\\lsc\\lsc.Model\\obj\\",
+      "outputPath": "D:\\Code\\crm\\lsc\\lsc.Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"

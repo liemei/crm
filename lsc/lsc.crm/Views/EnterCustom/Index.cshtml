@@ -1,6 +1,6 @@
-﻿@using bnuxq.Model
-@using bnuxq.Model.Enume
-@model List<bnuxq.Model.EnterCustomer>
+﻿@using lsc.Model
+@using lsc.Model.Enume
+@model List<lsc.Model.EnterCustomer>
 @{
     ViewData["Title"] = "客户管理";
     Layout = "~/Pages/_Layout.cshtml";
@@ -21,7 +21,7 @@
     在客户管理中展示了自己管理的客户信息，可以对客户进行相关操作
     <a class="layui-btn layui-btn-normal" href="/EnterCustom/AddEnterCustom?id=0">添加客户</a>
     <a class="layui-btn layui-btn-normal" href="/EnterCustom/AddEnterCustomQuick">快速录入客户</a>
-    <a href="http://Resources.bnuxq.com:8082\docfile\excel\CRM客户信息模板.xlsx" class="layui-btn layui-btn-normal">下载模板</a>
+    <a href="http://Resources.lsc.com:8082\docfile\excel\CRM客户信息模板.xlsx" class="layui-btn layui-btn-normal">下载模板</a>
     <button class="layui-btn test" lay-data="{url: '/UploadApi/uploadEnterCustom', accept: 'file'}">上传客户信息</button>
 </blockquote>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">

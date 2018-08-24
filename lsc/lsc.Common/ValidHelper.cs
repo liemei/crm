@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace bnuxq.Common
+namespace lsc.Common
 {
     public static class ValidHelper
     {

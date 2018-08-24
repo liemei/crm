@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using bnuxq.Common;
+using lsc.Common;
 
-namespace bnuxq.crm
+namespace lsc.crm
 {
     public class Startup
     {

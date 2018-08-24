@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using bnuxq.Model;
-using bnuxq.Common;
+using lsc.Model;
+using lsc.Common;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     /// <summary>
     /// 角色相关操作

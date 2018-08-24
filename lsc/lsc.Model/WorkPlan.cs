@@ -1,9 +1,9 @@
-﻿using bnuxq.Model.Enume;
+﻿using lsc.Model.Enume;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace bnuxq.Model
+namespace lsc.Model
 {
     /// <summary>
     /// 工作计划

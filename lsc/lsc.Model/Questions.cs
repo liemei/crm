@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using bnuxq.Model.Enume;
+using lsc.Model.Enume;
 using System.ComponentModel.DataAnnotations;
 
-namespace bnuxq.Model
+namespace lsc.Model
 {
     /// <summary>
     /// 考题

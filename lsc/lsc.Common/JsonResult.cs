@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace bnuxq.Common
+namespace lsc.Common
 {
     [Serializable]
     public class JsonResult<T>

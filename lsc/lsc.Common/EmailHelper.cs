@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 
-namespace bnuxq.Common
+namespace lsc.Common
 {
     public class EmailHelper
     {

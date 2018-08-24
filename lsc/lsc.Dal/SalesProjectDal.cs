@@ -1,13 +1,13 @@
-﻿using bnuxq.Common;
-using bnuxq.Model;
-using bnuxq.Model.Enume;
+﻿using lsc.Common;
+using lsc.Model;
+using lsc.Model.Enume;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     public class SalesProjectDal
     {

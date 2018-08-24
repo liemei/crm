@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace bnuxq.Dal.Migrations
+namespace lsc.Dal.Migrations
 {
     public partial class createAlltable : Migration
     {

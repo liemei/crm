@@ -1,5 +1,5 @@
-﻿using bnuxq.Common;
-using bnuxq.Model;
+﻿using lsc.Common;
+using lsc.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     /// <summary>
     /// 企业联系人相关操作

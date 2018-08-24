@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using bnuxq.Model;
+using lsc.Model;
 using System.Linq;
-using bnuxq.Common;
+using lsc.Common;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     public class UserRoleJurisdictionDal
     {

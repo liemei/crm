@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using bnuxq.Model;
-using bnuxq.Common;
+using lsc.Model;
+using lsc.Common;
 using Microsoft.AspNetCore.Http;
-using bnuxq.crm.Filter;
+using lsc.crm.Filter;
 using Microsoft.AspNetCore.Mvc.Filters;
-using bnuxq.Bll;
+using lsc.Bll;
 
-namespace bnuxq.crm.Controllers
+namespace lsc.crm.Controllers
 {
     [UserLoginFilter]
     public class BaseController : Controller

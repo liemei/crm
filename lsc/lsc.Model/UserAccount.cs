@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace bnuxq.Model
+namespace lsc.Model
 {
     [Serializable]
     public class UserAccount

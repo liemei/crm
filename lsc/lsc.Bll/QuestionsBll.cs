@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using bnuxq.Dal;
-using bnuxq.Model;
-using bnuxq.Model.Enume;
+using lsc.Dal;
+using lsc.Model;
+using lsc.Model.Enume;
 
-namespace bnuxq.Bll
+namespace lsc.Bll
 {
     public class QuestionsBll
     {

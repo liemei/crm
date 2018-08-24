@@ -1,11 +1,11 @@
-﻿using bnuxq.Dal;
-using bnuxq.Model;
+﻿using lsc.Dal;
+using lsc.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bnuxq.Bll
+namespace lsc.Bll
 {
     /// <summary>
     /// 销售项目状态变更日志

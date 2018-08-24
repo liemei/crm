@@ -1,10 +1,10 @@
-﻿using bnuxq.Dal;
-using bnuxq.Model;
+﻿using lsc.Dal;
+using lsc.Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace bnuxq.Bll
+namespace lsc.Bll
 {
     public class UserBll
     {

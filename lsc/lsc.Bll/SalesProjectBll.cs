@@ -1,12 +1,12 @@
-﻿using bnuxq.Dal;
-using bnuxq.Model;
-using bnuxq.Model.Enume;
+﻿using lsc.Dal;
+using lsc.Model;
+using lsc.Model.Enume;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bnuxq.Bll
+namespace lsc.Bll
 {
     /// <summary>
     /// 销售项目相关操作

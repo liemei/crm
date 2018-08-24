@@ -1,12 +1,12 @@
-﻿using bnuxq.Common;
-using bnuxq.Model;
+﻿using lsc.Common;
+using lsc.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     /// <summary>
     /// 客户所处阶段更新日志相关操作

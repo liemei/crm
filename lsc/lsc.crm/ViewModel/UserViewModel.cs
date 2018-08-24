@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace bnuxq.crm.ViewModel
+namespace lsc.crm.ViewModel
 {
     [Serializable]
     public class UserViewModel

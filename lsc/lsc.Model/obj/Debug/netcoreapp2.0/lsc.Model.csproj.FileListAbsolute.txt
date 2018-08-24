@@ -16,3 +16,12 @@ D:\Code\Net\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfoInpu
 D:\Code\Net\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfo.cs
 D:\Code\Net\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.dll
 D:\Code\Net\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.pdb
+D:\Code\crm\lsc\lsc.Model\bin\Debug\netcoreapp2.0\lsc.Model.deps.json
+D:\Code\crm\lsc\lsc.Model\bin\Debug\netcoreapp2.0\lsc.Model.dll
+D:\Code\crm\lsc\lsc.Model\bin\Debug\netcoreapp2.0\lsc.Model.pdb
+D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.csprojResolveAssemblyReference.cache
+D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.csproj.CoreCompileInputs.cache
+D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfoInputs.cache
+D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfo.cs
+D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.dll
+D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.pdb

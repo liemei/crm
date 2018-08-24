@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using bnuxq.Dal;
-using bnuxq.Model;
+using lsc.Dal;
+using lsc.Model;
 
-namespace bnuxq.Bll
+namespace lsc.Bll
 {
     /// <summary>
     /// 邮件资源管理

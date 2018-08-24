@@ -1,10 +1,10 @@
-﻿using bnuxq.Model.Enume;
+﻿using lsc.Model.Enume;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace bnuxq.Model
+namespace lsc.Model
 {
     /// <summary>
     /// 角色

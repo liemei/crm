@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using bnuxq.Bll;
-using bnuxq.Model;
+using lsc.Bll;
+using lsc.Model;
 
-namespace bnuxq.crm.Pages.EnterCustom
+namespace lsc.crm.Pages.EnterCustom
 {
     public class DistributionUserListModel : PageModel
     {

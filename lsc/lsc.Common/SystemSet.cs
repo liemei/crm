@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 
-namespace bnuxq.Common
+namespace lsc.Common
 {
     public class SystemSet
     {
@@ -17,7 +17,7 @@ namespace bnuxq.Common
                     _MysqlConnectionString = configuration.GetConnectionString("MySqlConnection");
                 if (_MysqlConnectionString.IsNull())
                 {
-                    _MysqlConnectionString = "Server=localhost;database=bnuxq_crm;uid=root;pwd=xqpsy;";
+                    _MysqlConnectionString = "Server=localhost;database=crm;uid=root;pwd=xqpsy;";
                 }
                 return _MysqlConnectionString;
             }

@@ -1,5 +1,5 @@
-﻿@using bnuxq.Common
-@model bnuxq.Model.EnterCustContacts
+﻿@using lsc.Common
+@model lsc.Model.EnterCustContacts
 
 @{
     ViewData["Title"] = "客户联系人";
@@ -28,8 +28,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="1" title="男"  @(Model!=null && Model.Sex == bnuxq.Model.Enume.SexEnum.Man?"checked":"")>
-                <input type="radio" name="sex" value="2" title="女" @(Model!=null && Model.Sex == bnuxq.Model.Enume.SexEnum.Woman?"checked":"")>
+                <input type="radio" name="sex" value="1" title="男"  @(Model!=null && Model.Sex == lsc.Model.Enume.SexEnum.Man?"checked":"")>
+                <input type="radio" name="sex" value="2" title="女" @(Model!=null && Model.Sex == lsc.Model.Enume.SexEnum.Woman?"checked":"")>
             </div>
         </div>
         <div class="layui-form-item">

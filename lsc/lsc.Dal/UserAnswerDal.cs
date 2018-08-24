@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using bnuxq.Common;
-using bnuxq.Model;
+using lsc.Common;
+using lsc.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     public class UserAnswerDal
     {

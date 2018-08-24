@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace bnuxq.Model
+namespace lsc.Model
 {
     /// <summary>
     /// 用户数量相关统计

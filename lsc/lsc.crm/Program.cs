@@ -7,9 +7,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using bnuxq.Common;
+using lsc.Common;
 
-namespace bnuxq.crm
+namespace lsc.crm
 {
     public class Program
     {

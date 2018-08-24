@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using bnuxq.Bll;
-using bnuxq.Model;
-using bnuxq.Common;
-using bnuxq.crm.ViewModel;
+using lsc.Bll;
+using lsc.Model;
+using lsc.Common;
+using lsc.crm.ViewModel;
 
-namespace bnuxq.crm.Controllers
+namespace lsc.crm.Controllers
 {
     public class UsersController : BaseController
     {

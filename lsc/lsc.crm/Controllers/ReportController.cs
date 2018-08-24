@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using bnuxq.Common;
-using bnuxq.Bll;
-using bnuxq.Model;
-using bnuxq.crm.ViewModel;
+using lsc.Common;
+using lsc.Bll;
+using lsc.Model;
+using lsc.crm.ViewModel;
 
-namespace bnuxq.crm.Controllers
+namespace lsc.crm.Controllers
 {
     public class ReportController : BaseController
     {

@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bnuxq.Common
+namespace lsc.Common
 {
     public class HttpUtils
     {

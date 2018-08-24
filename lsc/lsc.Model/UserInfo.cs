@@ -1,8 +1,8 @@
-﻿using bnuxq.Model.Enume;
+﻿using lsc.Model.Enume;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace bnuxq.Model
+namespace lsc.Model
 {
     /// <summary>
     /// 用户

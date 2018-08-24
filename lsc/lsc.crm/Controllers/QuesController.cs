@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using bnuxq.Bll;
-using bnuxq.Common;
-using bnuxq.Model;
-using bnuxq.Model.Enume;
+using lsc.Bll;
+using lsc.Common;
+using lsc.Model;
+using lsc.Model.Enume;
 using Microsoft.AspNetCore.Mvc;
 
-namespace bnuxq.crm.Controllers
+namespace lsc.crm.Controllers
 {
     public class QuesController : BaseController
     {

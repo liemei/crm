@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace bnuxq.Common
+namespace lsc.Common
 {
     public enum LogerType
     {

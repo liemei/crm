@@ -1,12 +1,12 @@
-﻿using bnuxq.Common;
-using bnuxq.Model;
+﻿using lsc.Common;
+using lsc.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     public class UserDal
     {

@@ -1,9 +1,9 @@
-﻿using bnuxq.Common;
-using bnuxq.Model;
+﻿using lsc.Common;
+using lsc.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace bnuxq.Dal
+namespace lsc.Dal
 {
     public class DataContext: DbContext
     {

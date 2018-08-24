@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using bnuxq.Bll;
-using bnuxq.Common;
-using bnuxq.Model;
+using lsc.Bll;
+using lsc.Common;
+using lsc.Model;
 
-namespace bnuxq.crm.ViewModel
+namespace lsc.crm.ViewModel
 {
     public class SendEmailHelper
     {
@@ -50,7 +50,7 @@ namespace bnuxq.crm.ViewModel
                             var emailResourcese = emailResourceses[i];
                             var template = emailTemplateBll.GetByIds(sendEmailLog.EmailTempId);
                             string url =
-                                $"http://open.bnuxq.com:8080/Account/OpenEmailCallBack?logid=" + sendEmailLog.Id;
+                                $"http://open.lsc.com:8080/Account/OpenEmailCallBack?logid=" + sendEmailLog.Id;
                             string imag =
                                 $"<img src=\"{url}\" style=\"width: 1px; height: 1px;\" />";
 
@@ -100,7 +100,7 @@ namespace bnuxq.crm.ViewModel
                 var emailResourcese = emailResourceses[i];
                 var template = emailTemplateBll.GetByIds(log.EmailTempId);
                 string url =
-                    $"http://open.bnuxq.com:8080/Account/OpenEmailCallBack?logid=" + log.Id;
+                    $"http://open.lsc.com:8080/Account/OpenEmailCallBack?logid=" + log.Id;
                 string imag =
                     $"<img src=\"{url}\" style=\"width: 1px; height: 1px;\" />";
 

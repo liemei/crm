@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using bnuxq.Common;
-using bnuxq.Model.Enume;
-using bnuxq.Bll;
-using bnuxq.Model;
-using bnuxq.crm.ViewModel;
+using lsc.Common;
+using lsc.Model.Enume;
+using lsc.Bll;
+using lsc.Model;
+using lsc.crm.ViewModel;
 
-namespace bnuxq.crm.Controllers
+namespace lsc.crm.Controllers
 {
     /// <summary>
     /// 企业客户信息

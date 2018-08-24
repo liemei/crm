@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace bnuxq.Model.Enume
+namespace lsc.Model.Enume
 {
     /// <summary>
     /// 项目状态
