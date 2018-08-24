@@ -60,4 +60,4 @@
  
  ----
  
- 系统采用asp.netcore2.0 + efCore + mysql 前端基于layui的后台模板搭建
+ 系统采用asp.netcore2.0 + efCore + mysql 前端基于layui的后台模板搭建。管理员用户名admin，密码admin
