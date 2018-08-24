@@ -1,0 +1,9 @@
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\bin\Release\netcoreapp2.0\bnuxq.Model.deps.json
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\bin\Release\netcoreapp2.0\bnuxq.Model.dll
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\bin\Release\netcoreapp2.0\bnuxq.Model.pdb
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Release\netcoreapp2.0\bnuxq.Model.csprojResolveAssemblyReference.cache
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Release\netcoreapp2.0\bnuxq.Model.csproj.CoreCompileInputs.cache
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Release\netcoreapp2.0\bnuxq.Model.AssemblyInfoInputs.cache
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Release\netcoreapp2.0\bnuxq.Model.AssemblyInfo.cs
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Release\netcoreapp2.0\bnuxq.Model.dll
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Release\netcoreapp2.0\bnuxq.Model.pdb

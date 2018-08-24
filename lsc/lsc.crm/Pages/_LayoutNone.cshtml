@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开源-CRM</title>
+    <link rel="stylesheet" href="~/layui/css/layui.css">
+    <link rel="stylesheet" href="~/layui/css/main.css">
+    <script type="application/javascript" src="~/layui/layui.js"></script>
+    <script type="application/javascript" src="~/layui/jquery.js"></script>
+    <script type="application/javascript" src="~/layui/jquery.validate.js"></script>
+    <script type="application/javascript" src="~/layui/jquery.form.js"></script>
+</head>
+<body leftmargin=0 topmargin=0 oncontextmenu='return false' ondragstart='return false' onselectstart ='return false' onselect='document.selection.empty()' oncopy='document.selection.empty()' onbeforecopy='return false' onmouseup='document.selection.empty()'>
+    @RenderBody()
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

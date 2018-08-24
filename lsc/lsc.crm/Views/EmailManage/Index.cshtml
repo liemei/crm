@@ -1,0 +1,74 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.EmailResources>
+@{
+    ViewData["Title"] = "邮件资源管理";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<blockquote class="layui-elem-quote">
+    邮箱资源管理
+    <a class="layui-btn layui-btn-normal" href="/EmailManage/Add">添加邮箱资源</a>
+    @*<a href="http://Resources.bnuxq.com:8082\docfile\excel\CRM客户信息模板.xlsx" class="layui-btn layui-btn-normal">下载模板</a>
+    <button class="layui-btn test" lay-data="{url: '/UploadApi/uploadEnterCustom', accept: 'file'}">上传邮箱信息</button>*@
+</blockquote>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>邮箱资源管理</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>邮箱</th>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>端口号</th>
+                    <th>服务器IP</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (EmailResources emailResourcese in Model)
+                    {
+                        <tr>
+                            <td>@(emailResourcese.Email)</td>
+                            <td>@(emailResourcese.UserName)</td>
+                            <td>@(emailResourcese.Password)</td>
+                            <td>@(emailResourcese.Port)</td>
+                            <td>@(emailResourcese.SenderServerIp)</td>
+                            <td><a href="javascript:;" class="layui-btn layui-btn-danger" onclick="del('@(emailResourcese.Id)')">删除</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var layer, form;
+        layui.use(['element', 'layer', 'upload', 'table'],
+            function() {
+                var element = layui.element;
+                layer = layui.layer;
+                var upload = layui.upload;
+                var table = layui.table;
+            });
+       
+        del = function (id) {
+            layer.confirm('是否删除？', { icon: 3, title: '删除提示' }, function (index) {
+                $.get('/EmailManage/DelAsync?id=' + id,
+                    function(res) {
+                        if (res.code == 1) {
+                            layer.msg('成功', { icon: 6 });
+                            window.location.reload();
+                        } else {
+                            layer.msg('失败', { icon: 5 });
+                        }
+                    });
+                layer.close(index);
+            });
+        }
+    </script>
+}

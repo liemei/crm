@@ -1,0 +1,134 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@model List<Questions>
+
+    @{
+        ViewData["Title"] = "题库";
+        Layout = "~/Pages/_Layout.cshtml";
+    }
+    <blockquote class="layui-elem-quote">
+        题库
+        <a class="layui-btn layui-btn-normal" href="javascript:;" onclick="add()">添加试题</a>
+    </blockquote>
+    <div class="layui-row">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>内容</th>
+                    <th>类型</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (Questions questions in Model)
+                    {
+                        string qtype = string.Empty;
+                        switch (questions.QuestionsType)
+                        {
+                            case QuestionsTypeEnum.ChoiceMore:
+                                qtype = "多选题";
+                                break;
+                            case QuestionsTypeEnum.ChoiceOne:
+                                qtype = "单选题";
+                                break;
+                            case QuestionsTypeEnum.FillInTheBlanks:
+                                qtype = "问答题";
+                                break;
+                        }
+                        <tr>
+                            <td>
+                                @if (questions.QuestionsType!= QuestionsTypeEnum.FillInTheBlanks)
+                                {
+                                    <a href="javascript:;" onclick="showOption('@(questions.Id)')">@(questions.Content)</a>
+                                }
+                                else
+                                {
+                                    <span>@(questions.Content)</span>
+                                }
+                            </td>
+                            <td>@(qtype)</td>
+                            <td><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger" onclick="del('@(questions.Id)')">删除</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+
+    @section Scripts{
+        <script type="text/javascript">
+        var layer, form
+        layui.use(['element', 'layer', 'laypage', 'table'],
+            function() {
+                form = layui.form;
+                layer = layui.layer;
+                var laypage = layui.laypage;
+                var upload = layui.upload;
+                var table = layui.table;
+
+                //分页
+                laypage.render({
+                    elem: 'page' //分页容器的id
+                    ,
+                    count: @(ViewBag.total) //总页数
+                    ,
+                    limit: 35,
+                    skin: '#1E9FFF' //自定义选中色值
+                    //,skip: true //开启跳页
+                    ,
+                    curr: @(ViewBag.pageIndex) //获取起始页
+                    ,
+                    jump: function(obj, first) {
+                        console.log(obj)
+                        if (!first) {
+                            window.location = '/Ques/Index?pageIndex=' + obj.curr;
+                        }
+                    },
+                    hash: 'fenye' //自定义hash值
+                });
+            });
+
+
+        del = function(id) {
+            layer.confirm('试题与答案一同删除，是否删除？',
+                { icon: 3, title: '删除提示' },
+                function(index) {
+                    $.get('/Ques/DelQuestion?id=' + id,
+                        function(res) {
+                            if (res.code === 1) {
+                                layer.msg('成功', { icon: 6 });
+                                window.location.reload();
+                            } else {
+                                layer.msg('失败', { icon: 5 });
+                            }
+                        })
+                    layer.close(index);
+                });
+        }
+
+        add = function() {
+            layer.open({
+                type: 2,
+                title: '添加题目',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['420px', '35%'],
+                content: '/Ques/AddQuestion'
+            });
+            }
+
+        showOption = function(id) {
+            layer.open({
+                type: 2,
+                title: '答案选项列表',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['450px', '35%'],
+                content: '/Ques/OptionList?questionId=' + id
+        });
+        }
+        </script>
+    }

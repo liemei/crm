@@ -1,0 +1,91 @@
+﻿@using bnuxq.Model.Enume
+@model List<bnuxq.Model.EnterCustomer>
+
+@{
+    Layout = null;
+}
+<table class="layui-table">
+    <thead>
+        <tr>
+            <th>客户名称</th>
+            <th>客户简介</th>
+            <th>种类</th>
+            <th>关系等级</th>
+            <th>价值评估</th>
+            <th>客户来源</th>
+            <th>阶段</th>
+            <th>是否是热点客户</th>
+            <th>热点分类</th>
+            <th>最后跟踪时间</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var ec in Model)
+            {
+                <tr>
+                    <td>@ec.EnterName</td>
+                    <td>@ec.CustAbstract</td>
+                    <td>@ec.CustomerType.TryToStr()</td>
+                    <td>@ec.Relationship.TryToStr()</td>
+                    <td>@ec.ValueGrade.TryToStr()</td>
+                    <td>@ec.Source.TryToStr()</td>
+                    <td><a href="/EnterCustom/EnterCustPhaseLogList?id=@(ec.ID)">@ec.Phase.TryToStr()</a></td>
+                    <td>@(ec.IsHeat?"是":"否")</td>
+                    <td>@ec.HeatTYPE.TryToStr()</td>
+                    <td>@ec.UpdateTime.ToString("yyyy-MM-dd hh:mm:ss")</td>
+                    <td>@ec.Rem</td>
+                    <td>
+                        <div class="layui-btn-group">
+                            <a href="javascript:;" class="layui-btn layui-btn-small" onclick="entercallback('@(ec.ID)')">放入客户池</a>
+                            <a href="javascript:;" class="layui-btn layui-btn-small" onclick="updatephase('@(ec.ID)')">更新客户阶段</a>
+                            <a href="javascript:;" onclick="showcontroller('@(ec.ID)')" class="layui-btn layui-btn-small">查看联系人</a>
+                            <a href="/EnterCustom/AddEnterCustContacts?id=0&EnterCustID=@(ec.ID)" class="layui-btn layui-btn-small">添加联系人</a>
+                            <a href="/EnterCustom/AddEnterCustom?id=@(ec.ID)" class="layui-btn layui-btn-small">编辑</a>
+                            <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(ec.ID)')">删除</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div id="page"></div>
+<script src="~/layui/layui.all.js"></script>
+<script type="text/javascript">
+    var layer
+    layui.use(['table', 'laypage', 'layer'], function () {
+        var table = layui.table
+        var laypage = layui.laypage
+        layer = layui.layer
+        console.log(1111)
+        //分页
+        laypage.render({
+            elem: 'page' //分页容器的id
+            , count: @(ViewBag.count) //总页数
+            ,limit:20
+            , skin: '#1E9FFF' //自定义选中色值
+            //,skip: true //开启跳页
+            , jump: function (obj, first) {
+                console.log(obj)
+                if (!first) {
+                    layer.msg('第' + obj.curr + '页');
+                }
+            }
+        });
+
+    })
+
+
+</script>
+
+
+
+
+
+@section Scripts{
+ 
+}

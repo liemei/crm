@@ -1,0 +1,56 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.SalesProject>
+
+@{
+    ViewData["Title"] = "应收账款客户";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+    List<EnterCustomer> enterlist = ViewBag.enterlist;
+}
+
+<table class="layui-table">
+    <thead >
+        <tr>
+            <th>项目标题</th>
+            <th>客户</th>
+            <th>立项时间</th>
+            <th>项目金额</th>
+            <th>已回款</th>
+            <th>预计回款时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model!=null )
+        {
+            foreach (var info in Model)
+            {
+                string name = string.Empty;
+                if (enterlist!=null && enterlist.Count>0)
+                {
+                    var enter = enterlist.FirstOrDefault(x=>x.ID == info.EnterCustomerID);
+                    if (enter!=null)
+                    {
+                        name = enter.EnterName;
+                     }
+                }
+                <tr>
+                    <td>@info.Title</td>
+                    <td>@name</td>
+                    <td>@info.ProjectTime.ToString("yyyy-MM-dd")</td>
+                    <td>@info.ProjectAmt</td>
+                    <td>@info.ReceoverPay</td>
+                    <td>@info.ReceoverPayTime</td>
+                </tr>
+             }
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+<script type="text/javascript">
+        var layer, table
+        layui.use(['layer', 'table'], function () {
+            layer = layui.layer
+            table = layui.table
+        })
+</script>
+}

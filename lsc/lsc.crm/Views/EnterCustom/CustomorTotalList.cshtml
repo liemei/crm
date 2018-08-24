@@ -1,0 +1,40 @@
+﻿@using bnuxq.Model.Enume
+@model List<bnuxq.Model.EnterCustomer>
+
+@{
+    ViewData["Title"] = "CustomorTotalList";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+
+<table class="layui-table">
+    <thead class="layui-table-header">
+        <tr>
+            <th>企业名称</th>
+            <th>企业类型</th>
+            <th>客户来源</th>
+            <th>阶段</th>
+            <th>省份</th>
+            <th>城市</th>
+            <th>客户简介</th>
+        </tr>
+    </thead>
+    <tbody class="layui-table-body">
+        @if (Model != null)
+        {
+            foreach (var info in Model)
+            {
+                <tr>
+                    <td>@info.EnterName</td>
+                    <td>@info.CustomerType.TryToStr()</td>
+                    <td>@info.Source.TryToStr()</td>
+                    <td>@info.Phase.TryToStr()</td>
+                    <td>@info.Province</td>
+                    <td>@info.City</td>
+                    <td>@info.CustAbstract</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+

@@ -1,0 +1,116 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.SendEmailLog>
+@{
+    ViewData["Title"] = "邮件发送日志";
+    Layout = "~/Pages/_Layout.cshtml";
+    SendEmailTask taskinfo = ViewBag.taskinfo;
+}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>邮件发送日志</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>任务名称</th>
+                <th>邮箱</th>
+                <th>姓名</th>
+                <th>是否已发送</th>
+                <th>是否发送成功</th>
+                <th>是否已读</th>
+                <th>操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model != null)
+            {
+                foreach (var log in Model)
+                {
+                    string isokstr = string.Empty;
+                    string IsReadstr = string.Empty;
+                    if (!log.IsSend)
+                    {
+                        isokstr = "未发送";
+                        IsReadstr = "未发送";
+                    }
+                    else
+                    {
+                        if(log.IsSendOk)
+                        {
+                            isokstr = "发送成功";
+                        }
+                        else
+                        {
+                            isokstr = "发送失败";
+                        }
+                        if (log.IsRead)
+                        {
+                            IsReadstr = "已读";
+                        }
+                        else
+                        {
+                            IsReadstr = "未读";
+                        }
+                    }
+                    <tr>
+                        <td>@(taskinfo?.TaskName)</td>
+                        <td>@(log.Email)</td>
+                        <td>@(log.Name)</td>
+                        <td>@(log.IsSend ? "已发送" : "未发送")</td>
+                        <td>@(isokstr)</td>
+                        <td>@(IsReadstr)</td>
+                        <td><a href="javascript:;" class="layui-btn layui-btn-small" onclick="sendemail('@(log.Id)')">发送</a></td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer, laypage;
+        layui.use(['element', 'layer', 'table','laypage'],
+            function() {
+                var element = layui.element;
+                layer = layui.layer;
+                var table = layui.table;
+                laypage = layui.laypage;
+                //分页
+                laypage.render({
+                    elem: 'page' //分页容器的id
+                    , count: @(ViewBag.count) //总页数
+                    ,limit:@(ViewBag.pageSize)
+                    , skin: '#1E9FFF' //自定义选中色值
+                    //,skip: true //开启跳页
+                    ,curr: @(ViewBag.pageIndex) //获取起始页
+                    , jump: function (obj, first) {
+                        if (!first) {
+                            window.location =
+                                '/EmailManage/SendEmailLogList?sendEmailTaskId=@(ViewBag.sendEmailTaskId)&pageIndex=' +
+                                obj.curr;
+                        }
+                    }
+                    , hash: 'fenye' //自定义hash值
+                });
+            });
+        sendemail = function (id) {
+            layer.confirm('是否发送邮件？', { icon: 3, title: '邮件发送提示' }, function (index) {
+                $.get('/EmailManage/SendEmail?logId=' + id,
+                    function (res) {
+                        if (res.code == 1) {
+                            layer.msg('已经发送', { icon: 6 });
+                            window.location.reload();
+                        } else {
+                            layer.msg('发送失败', { icon: 5 });
+                        }
+                    });
+                layer.close(index);
+            });
+        }
+    </script>
+}

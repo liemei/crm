@@ -1,0 +1,50 @@
+﻿@using bnuxq.Model.Enume
+@model List<bnuxq.Model.EnterCustPhaseLog>
+
+@{
+    ViewData["Title"] = "EnterCustPhaseLogList";
+    Layout = "~/Pages/_Layout.cshtml";
+    string EnterName = ViewBag.EnterName;
+}
+<blockquote class="layui-elem-quote">
+    客户【@EnterName】阶段时间线
+</blockquote>
+<ul class="layui-timeline">
+    @if (Model != null)
+    {
+        foreach (var log in Model)
+        {
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title">@log.Phase.TryToStr()</h3>
+                    @Html.Raw(log.Rem)
+                    <br />
+                    <span style="margin-left: 100px;">-----<small>@log.UserName【@log.CreateTime.ToString("yyyy-MM-dd")】</small></span>
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">过去</h3>
+                <p>
+                    暂时没有动态<i class="layui-icon"></i>
+                </p>
+            </div>
+        </li>
+    }
+
+</ul>
+@section Scripts{
+    <script type="text/javascript">
+        var layer
+        layui.use('element', function () {
+        })
+
+
+    </script>
+}

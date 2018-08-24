@@ -1,0 +1,53 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@model List<EnterCustContacts>
+@{
+    ViewData["Title"] = "联系人列表";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+
+<table class="layui-table">
+    <thead class="layui-table-header">
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>部门</th>
+            <th>职务</th>
+            <th>负责业务</th>
+            <th>手机号</th>
+            <th>座机</th>
+            <th>邮箱</th>
+            <th>QQ</th>
+            <th>微信号</th>
+            <th>住址</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody class="layui-table-body">
+        @if (Model != null)
+        {
+            foreach (var info in Model)
+            {
+                <tr>
+                    <td>@info.Name</td>
+                    <td>@info.Sex.TryToStr()</td>
+                    <td>@info.Department</td>
+                    <td>@info.Duties</td>
+                    <td>@info.Business</td>
+                    <td>@info.Telephone</td>
+                    <td>@info.Landline</td>
+                    <td>@info.Email</td>
+                    <td>@info.QQ</td>
+                    <th>@info.WeChart</th>
+                    <td>@info.Address</td>
+                    <td>@info.Rem</td>
+                    <td><a href="/EnterCustom/AddEnterCustContacts?id=@(info.ID)&EnterCustID=@(info.EnterCustID)">编辑</a></td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+

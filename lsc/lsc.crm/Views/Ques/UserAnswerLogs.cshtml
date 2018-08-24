@@ -1,0 +1,111 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.UserAnswerLog>
+
+@{
+    ViewData["Title"] = "员工考试记录";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<UserInfo> userList = ViewBag.userList;
+    int userId = ViewBag.userId;
+}
+<blockquote class="layui-elem-quote">
+    员工考试记录
+</blockquote>
+<div class="layui-row">
+    <div class="layui-col-md3">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">请选择员工</label>
+                <div class="layui-input-inline">
+                    <select class="layui-select" name="userId">
+                        <option value="0"></option>
+                        @if (userList != null)
+                        {
+                            foreach (UserInfo userInfo in userList)
+                            {
+                                <option value="@(userInfo.ID)" @(userId == userInfo.ID? "selected":"")>@(userInfo.Name)</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="layui-col-md3">
+        <a class="layui-btn" href="javascript:;" onclick="query()">查询</a>
+    </div>
+</div>
+<div class="layui-row">
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>测试时间</th>
+            <th>分数</th>
+            <th>耗时</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (UserAnswerLog userAnswerLog in Model)
+                {
+                    var user = userList?.FirstOrDefault(x => x.ID == userAnswerLog.UserId);
+                    <tr>
+                        <td>@(user?.Name)</td>
+                        <td>@(userAnswerLog.CreateTime.ToString("yyyy-MM-dd hh:mm:ss"))</td>
+                        <td>@(userAnswerLog.TotalScore)</td>
+                        <td>@(userAnswerLog.Duration)分钟</td>
+                        <td><a href="/Ques/UserAnswerLogInfo?logId=@(userAnswerLog.Id)">查看答题情况</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div id="page"></div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer, form
+        layui.use(['element', 'layer', 'laypage', 'table','form'],
+            function() {
+                form = layui.form;
+                layer = layui.layer;
+                var laypage = layui.laypage;
+                var table = layui.table;
+
+                //分页
+                laypage.render({
+                    elem: 'page' //分页容器的id
+                    ,
+                    count: @(ViewBag.total) //总页数
+                    ,
+                    limit: 35,
+                    skin: '#1E9FFF' //自定义选中色值
+                    //,skip: true //开启跳页
+                    ,
+                    curr: @(ViewBag.pageIndex) //获取起始页
+                    ,
+                    jump: function(obj, first) {
+                        console.log(obj)
+                        var userid = $("select[name='userId']")[0].value;
+                        console.log(userid);
+                        if (!first) {
+                            window.location = '/Ques/UserAnswerLogs?pageIndex=' + obj.curr + '&userId=' + userid;
+                        }
+                    },
+                    hash: 'fenye' //自定义hash值
+                });
+            });
+
+        var query = function() {
+            var userid = $("select[name='userId']")[0].value;
+            window.location = '/Ques/UserAnswerLogs?pageIndex=1&userId=' + userid;
+        }
+    </script>
+}
+
+
+
+

@@ -1,0 +1,136 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@using Microsoft.EntityFrameworkCore.Internal
+@model List<bnuxq.Model.UserQuestions>
+
+@{
+    ViewData["Title"] = "答题详情";
+    Layout = "~/Pages/_Layout.cshtml";
+
+    List<Questions> questionses = ViewBag.questionses;
+    List<Option> options = ViewBag.options;
+    List<UserAnswer> userAnswers = ViewBag.userAnswers;
+    bool isadmin = ViewBag.isadmin;
+}
+<blockquote class="layui-elem-quote">
+    答题详情
+</blockquote>
+@if (Model != null)
+{
+    foreach (UserQuestions userQuestionse in Model)
+    {
+        if (questionses != null)
+        {
+            var question = questionses.FirstOrDefault(x => x.Id == userQuestionse.QuestionsId);
+
+            <div class="layui-row manage-ti"  id="@(userQuestionse.QIndex)">
+                <form class="layui-form" id="form_@(userQuestionse.QIndex)">
+                    <h3>@(userQuestionse.QIndex)、@(question != null ? question.Content : "")</h3>
+                    @if (question != null)
+                    {
+                        var optionList = options.Where(x => x.QuestionsId == userQuestionse.QuestionsId).OrderBy(x => x.ItemIndex);
+                        string okopton = string.Empty;
+                        if (optionList!=null)
+                        {
+                            var index = optionList.Where(x => x.IsOk).Select(x => x.ItemIndex);
+                            if (index != null && index.Count() == 1)
+                            {
+                                okopton = index.FirstOrDefault();
+                            }
+                            else
+                            {
+                                okopton = index?.Join("、");
+                            }
+                           
+                        }
+                        switch (question.QuestionsType)
+                        {
+                            case QuestionsTypeEnum.ChoiceOne:
+                                if (optionList != null)
+                                {
+                                    <ul>
+                                        @foreach (var op in optionList)
+                                        {
+                                            UserAnswer userAnswer = userAnswers?.FirstOrDefault(x => x.OptionId == op.Id);
+                                            if (userAnswer != null)
+                                            {
+                                                <li><input type="radio" name="optionId" title="@(op.ItemIndex)、@(op.Content)" checked><span style="@(userAnswer.Score==0?"color:red":"")">[@(userAnswer.Score)分]</span></li>
+                                            }
+                                            else
+                                            {
+                                                <li><input type="radio" name="optionId" data-oid="@(op.Id)" title="@(op.ItemIndex)、@(op.Content)"></li>
+                                            }
+                                        }
+                                        <li>正确答案：@(okopton)</li>
+                                    </ul>
+                                }
+                                break;
+                            case QuestionsTypeEnum.ChoiceMore:
+                                if (optionList != null)
+                                {
+                                    <ul>
+                                        @foreach (var op in optionList)
+                                        {
+                                            UserAnswer userAnswer = userAnswers?.FirstOrDefault(x => x.OptionId == op.Id);
+                                            if (userAnswer != null)
+                                            {
+                                                <li><input type="checkbox" name="optionId" title="@(op.ItemIndex)、@(op.Content)" lay-skin="primary" checked><span  style="@(userAnswer.Score==0?"color:red":"")">[@(userAnswer.Score)分]</span></li>
+
+                                            }
+                                            else
+                                            {
+                                                <li><input type="checkbox" name="optionId" data-oid="@(op.Id)" title="@(op.ItemIndex)、@(op.Content)" lay-skin="primary"></li>
+                                            }
+
+                                        }
+                                        <li>正确答案：@(okopton)</li>
+                                    </ul>
+                                }
+                                break;
+                            case QuestionsTypeEnum.FillInTheBlanks:
+                                UserAnswer userAn = userAnswers?.FirstOrDefault(x => x.QuestionId == question.Id);
+                                <div class="layui-form-item">
+                                    <p style=" padding-left: 30px; padding-top: 5px; ">
+                                        @(userAn != null ? userAn.Content : "")
+                                        <span style="@(userAn?.Score==0?"color:red":"")">【@(userAn?.Score)分】</span>
+                                        @if (isadmin && userAn != null && userAn.Score == 0)
+                                        {
+                                            <a href="javascript:;" class="layui-btn" onclick="setScore('@(userAn.Id)')">设置分数</a>
+                                        }
+                                    </p>
+                                </div>
+                                break;
+                        }
+                    }
+                </form>
+
+            </div>
+        }
+    }
+}
+@section Scripts{
+    <script src="~/layui/jquery.validate.js"></script>
+    <script src="~/layui/jquery.form.js"></script>
+    <script>
+        var layer;
+        layui.use('form',
+            'element',
+            'layer',
+            function() {
+                var form = layui.form;
+                var element = layui.element;
+                layer = layui.layer;
+            });
+
+        var setScore = function(id) {
+            layer.prompt({ title: '请输入分数：', formType: 3 }, function (text, index) {
+                layer.close(index);
+                $.post('/Ques/SetAnswerScore', { score: text, id: id }, function (res) {
+                    if (res.code === 1) {
+                        window.location.reload();
+                    }
+                })
+            });
+        }
+    </script>
+}

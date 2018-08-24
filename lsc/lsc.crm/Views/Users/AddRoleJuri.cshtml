@@ -1,0 +1,140 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.UserRoleJurisdiction>
+
+@{
+    ViewData["Title"] = "角色权限";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<ModuleInfo> mlist = ViewBag.mlist;
+    UserRole userRole = ViewBag.userRole;
+}
+
+<blockquote class="layui-elem-quote">
+    @(userRole.RoleName)的权限列表
+    @*<a class="layui-btn layui-btn-normal" href="javascript:;" target="_blank" onclick="Addmodule()">增加权限</a>*@
+</blockquote>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>@(userRole.RoleName)权限列表</legend>
+</fieldset>
+<table class="layui-table">
+    <thead>
+        <tr>
+            <th>模块</th>
+            <th>增加</th>
+            <th>查询</th>
+            <th>修改</th>
+            <th>删除</th>
+            <th>分配</th>
+            <th>全选</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (mlist != null && mlist.Count > 0)
+        {
+            foreach (var m in mlist)
+            {
+                UserRoleJurisdiction rolejur = null;
+                if (Model != null && Model.Count > 0)
+                {
+                    rolejur = Model.FirstOrDefault(x => x.ModuleID == m.ID);
+                }
+                <tr class="rolejurlist" data-id="@(rolejur!=null ? rolejur.ID:0)">
+                    <td data-name="ModuleID" data-value="@m.ID">@m.Name</td>
+                    <td data-name="IsAdd"><input type="checkbox"  @(rolejur!=null && rolejur.IsAdd ? "checked" : "") /></td>
+                    <td data-name="IsQuery"><input type="checkbox" @(rolejur != null && rolejur.IsQuery ? "checked" : "") /></td>
+                    <td data-name="IsEdit"><input type="checkbox" @(rolejur != null && rolejur.IsEdit ? "checked" : "") /></td>
+                    <td data-name="IsDelete"><input type="checkbox" @(rolejur != null && rolejur.IsDelete ? "checked" : "") /></td>
+                    <td data-name="IsAssignment"><input type="checkbox" @(rolejur != null && rolejur.IsAssignment ? "checked" : "") /></td>
+                    <td data-name="checkedall"><input type="checkbox" onchange="onchangs(this)" /></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<blockquote class="layui-elem-quote layui-quote-nm"><button class="layui-btn saverolejur">保存</button></blockquote>
+@section Scripts{
+    <script type="text/javascript">
+        var layer
+        layui.use(['layer', 'element'], function () {
+        var element = layui.element
+        layer = layui.layer;
+        })
+
+        $(".saverolejur").on('click', function () {
+            $("tr.rolejurlist").each(function (index, element) {
+                var rolejur = {}
+                rolejur.ID = $(element).attr('data-id')
+                rolejur.UserRoleID = @(ViewBag.roleid)
+                $(element).find('td').each(function (i, e) {
+                    var name = $(e).attr('data-name')
+                    if (name == 'ModuleID') { 
+                        rolejur.ModuleID = $(e).attr('data-value')
+                    }
+                    if (name == 'IsAdd') {
+                        rolejur.IsAdd = $(e).find('input').first().is(':checked')
+                    }
+                    if (name == 'IsQuery') {
+                        rolejur.IsQuery = $(e).find('input').first().is(':checked')
+                    }
+                    if (name == 'IsEdit') {
+                        rolejur.IsEdit = $(e).find('input').first().is(':checked')
+                    }
+                    if (name == 'IsDelete') {
+                        rolejur.IsDelete = $(e).find('input').first().is(':checked')
+                    }
+                    if (name == 'IsAssignment') {
+                        rolejur.IsAssignment = $(e).find('input').first().is(':checked')
+                    }
+                    })
+                $.post('/Users/SaveRoleJuri', rolejur, function (res) {
+                    console.log(res)
+                 })
+                console.log(rolejur)
+            })
+            layer.msg('保存成功', { icon: 6 });
+        })
+        function onchangs(ck)
+        {
+            $(ck).parent().parent().find('input').each(function (index, element) {
+                if (ck != element) {
+                    if ($(ck).is(':checked')) {
+                        $(element).prop('checked', true)
+                    } else { 
+                        $(element).prop('checked', false)
+                    }
+                }
+                
+             });
+         }
+        $('.checkedall').on('onchange', function () {
+            console.log(this)
+            console.log(222)
+        })
+    @*function Addmodule(){
+        layer.open({
+            type: 2,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['620px', '540px'], //宽高
+            fixed: false,
+            content: "/Users/AddRoleJuriForm?roleid=@(ViewBag.roleid)"
+
+        });
+    }*@
+    //function Del(id) {
+    //    layer.confirm('是否删除该模块？', {
+    //        btn: ['删除', '取消'] //按钮
+    //    }, function () {
+    //        $.get('/Users/DelModel?id=' + id, function (res) {
+    //            if (res.code === 1) {
+    //                layer.msg('删除成功', { icon: 6 });
+    //                window.location.reload()
+    //            } else {
+    //                layer.msg('删除失败', { icon: 5 });
+    //            }
+    //        })
+    //    }, function () {
+    //    });
+    //}
+
+    </script>
+}

@@ -1,0 +1,91 @@
+﻿@using bnuxq.Model.Enume
+@model bnuxq.Model.EnterCustomer
+
+@{
+    ViewData["Title"] = "更新阶段，添加联系记录";
+    int types = ViewBag.types;
+    Layout = "~/Pages/_LayoutNone.cshtml";
+    if (types!=0)
+    {
+        Layout = "~/Pages/_Layout.cshtml";
+    }
+}
+<form class="layui-form" method="post" id="addform">
+    <div class="layui-form-item">
+        <label class="layui-form-label">阶段</label>
+        <div class="layui-input-inline">
+            <select class="layui-form-select" name="Phase">
+                <option value="1"  @(Model.Phase == PhaseEnume.Pre_sale ? "selected":"")>售前跟踪</option>
+                <option value="2" @(Model.Phase == PhaseEnume.Demand_Confirmation ? "selected":"")>需求确定</option>
+                <option value="3" @(Model.Phase == PhaseEnume.In_Sales ? "selected":"")>售中跟单</option>
+                <option value="4" @(Model.Phase == PhaseEnume.Sign_Contract ? "selected":"")>签约洽谈</option>
+                <option value="5" @(Model.Phase == PhaseEnume.After_Sale ? "selected":"")>成交售后</option>
+                <option value="6" @(Model.Phase == PhaseEnume.Invalid ? "selected":"")>跟单失败</option>
+                <option value="7" @(Model.Phase == PhaseEnume.Shelve ? "selected":"")>暂且搁置</option>
+                <option value="8" @(Model.Phase == PhaseEnume.Other ? "selected":"")>其他阶段</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea layui-hide" name="Rem" lay-verify="content" id="Rem" required></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <input type="hidden" name="EnterCustomerID" value="@(Model.ID)" />
+            <input type="hidden" name="types" value="@(types)"id="types" />
+            <button class="layui-btn" lay-submit lay-filter="logform">立即提交</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+        var layer
+        layui.use(['layer', 'form','layedit'], function () {
+            layer = layui.layer;
+            var form = layui.form;
+            var layedit = layui.layedit;
+            // 创建一个编辑器
+            layedit.set({
+                uploadImage: {
+                    url: '/UploadApi/uploadImage' //接口url
+                    , type: 'post' //默认post
+                }
+            });
+
+            var editIndex = layedit.build('Rem', {
+                height: 370 //设置编辑器高度
+            });
+            form.on('submit(logform)', function (data) {
+                layedit.sync(editIndex)
+                data.field.Rem = layedit.getContent(editIndex);
+                
+                $.post("/EnterCustom/SaveEnterCustPhaseLog", data.field, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        var types = Number($("#types").val());
+                        if (types === 0) {
+                            console.log("关闭所有弹窗");
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭        
+                        } else {
+                            window.location = '/EnterCustom/Index';
+                        }
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+                return false;
+            });
+
+            form.verify({
+                Rem: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    layedit.sync(editIndex);
+                    if (value.length < 30) {
+                        return '说明至少要50个字';
+                    }
+                }
+            });
+        })
+</script>

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "添加回款记录";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+<form class="layui-form" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">回款金额</label>
+        <div class="layui-input-inline">
+            <input type="number" class="layui-input layui-form-text" required lay-verify="required|number" name="Amt" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-inline">
+            <textarea name="Rem" class="layui-textarea"  required lay-verify="required"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <input type="hidden" name="SalesProjectID" value="@(ViewBag.SalesProjectID)" />
+            <button class="layui-btn" lay-submit lay-filter="logform">立即提交</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    var layer
+    layui.use(['layer', 'form'], function () {
+        layer = layui.layer
+        var form = layui.form;
+
+        form.on('submit(logform)', function (data) {
+            $.post("/EnterCustom/SaveReceovedPayLog", data.field, function (res) {
+                if (res.code == 1) {
+                    layer.msg('保存成功', { icon: 6 });
+                } else {
+                    layer.msg('保存失败', { icon: 5 });
+                }
+            })
+            return false;
+        });
+    })
+</script>

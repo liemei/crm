@@ -1,0 +1,2 @@
+14:56:29.7554222 >ERROR> SalesProjectDal.GetTupleAsync > Table 'bnuxq_crm.salesprojects' doesn't exist,MySqlConnector
+15:53:19.9323668 >ERROR> SalesProjectDal.GetTupleAsync > Table 'bnuxq_crm.salesprojects' doesn't exist,MySqlConnector

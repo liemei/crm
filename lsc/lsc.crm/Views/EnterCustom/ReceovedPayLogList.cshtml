@@ -1,0 +1,44 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.ReceivedPaymentsLog>
+
+@{
+    ViewData["Title"] = "已收账款明细";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+    List<SalesProject> projectlist = ViewBag.projectlist;
+}
+
+<table class="layui-table">
+    <thead>
+        <tr>
+            <th>项目标题</th>
+            <th>回款金额</th>
+            <th>回款时间</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var info in Model)
+            {
+                string name = string.Empty;
+                
+                <tr>
+                    <td>@name</td>
+                    <td>@info.Amt</td>
+                    <td>@info.CreateTime.ToString("yyyy-MM-dd")</td>
+                    <td>@info.Rem</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script type="text/javascript">
+        var layer, table
+        layui.use(['layer', 'table'], function () {
+            layer = layui.layer
+            table = layui.table
+        })
+    </script>
+}

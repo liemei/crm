@@ -1,0 +1,164 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@model List<bnuxq.Model.UserQuestions>
+
+@{
+    ViewData["Title"] = "StartAnswer";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<Questions> list = ViewBag.list;
+    List<Option> optionList = ViewBag.optionList;
+}
+<blockquote class="layui-elem-quote">
+    正在答题
+</blockquote>
+@if (Model!=null)
+{
+    foreach (UserQuestions userQuestions in Model)
+    {
+        if (list!=null)
+        {
+            var question = list.FirstOrDefault(x => x.Id == userQuestions.QuestionsId);
+
+            <div class="layui-row manage-ti" style="display:@(userQuestions.QIndex==1?"block":"none")" id="@(userQuestions.QIndex)">
+                <form class="layui-form" id="form_@(userQuestions.QIndex)" method="post" action="/Ques/SaveUserAnswer">
+                    <h3>@(userQuestions.QIndex)、@(question!=null ? question.Content:"")</h3>
+                    @if (question != null)
+                    {
+                        var options = optionList.Where(x => x.QuestionsId == userQuestions.QuestionsId).OrderBy(x => x.ItemIndex);
+                        switch (question.QuestionsType)
+                        {
+                            case QuestionsTypeEnum.ChoiceOne:
+                                if (options != null)
+                                {
+                                    <ul>
+                                        @foreach (var op in options)
+                                        {
+                                            <li><input type="radio" name="optionId" data-oid="@(op.Id)" title="@(op.ItemIndex)、@(op.Content)"></li>
+                                        }
+                                    </ul>
+                                }
+                                break;
+                            case QuestionsTypeEnum.ChoiceMore:
+                                if (options != null)
+                                {
+                                    <ul>
+                                        @foreach (var op in options)
+                                        {
+                                            <li><input type="checkbox" name="optionId" data-oid="@(op.Id)" title="@(op.ItemIndex)、@(op.Content)" lay-skin="primary"></li>
+                                        }
+                                    </ul>
+                                }
+                                break;
+                            case QuestionsTypeEnum.FillInTheBlanks:
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <textarea name="Contents" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+                                break;
+                        }
+                    }
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="LogId" value="@(userQuestions.LogId)"/>
+                            <input type="hidden" name="QuestionId" value="@(userQuestions.QuestionsId)"/>
+                            <input type="hidden" name="OptionIds"/>
+                            <input type="hidden" name="Content"/>
+                            <input type="hidden" value="@(userQuestions.QIndex)" name="qindex"/>
+                            <input type="hidden" name='isend' value="0" />
+                            <input type="hidden" name="qtype" value="@(question!=null ? question.QuestionsType.ToString():"")"/>
+                            <button class="layui-btn" onclick="nextClick('form_@(userQuestions.QIndex)')">下一题</button>
+                        </div>
+                    </div>
+                </form>
+    
+            </div>
+        }
+     }
+}
+<input type="hidden" id="total" value="@(Model!=null?Model.Count:0)"/>
+
+@section Scripts{
+    <script src="~/layui/jquery.validate.js"></script>
+    <script src="~/layui/jquery.form.js"></script>
+    <script>
+
+        layui.use('form',
+            'element',
+            'layer',
+            function() {
+                var form = layui.form;
+                var element = layui.element;
+                var layer = layui.layer;
+            });
+
+        var nextClick = function(a) {
+            console.log(a);
+            $('#'+a).validate({
+                debug: true,
+                submitHandler: function (form) {
+                    console.log(form);
+                    var qtype = $(form).find("input[name='qtype']").val();
+                    if (qtype === 'ChoiceMore') {
+                        
+                        var opidInput = $(form).find("input[name='optionId']:checked");
+                        if (opidInput.length === 0) {
+                            layer.msg('至少要选择一项', { icon: 5 });
+                            return;
+                        }
+                        var opids = '';
+                        $(opidInput).each(function (index, elsement) {
+                            opids = opids + '|' + $(opidInput[index]).attr("data-oid");
+                        });
+                        $(form).find("input[name='OptionIds']").val(opids);
+                    }
+                    if (qtype === 'ChoiceOne') {
+                        var ids = $(form).find("input[name='optionId']:checked");
+                        if (ids.length === 0) {
+                            layer.msg('至少要选择一项', { icon: 5 });
+                            return;
+                        }
+                        var id = $(ids[0]).attr("data-oid");
+                        $(form).find("input[name='OptionIds']").val(id);
+                    }
+                    if (qtype === 'FillInTheBlanks') {
+                        console.log($(form).find('textarea')[0]);
+                        var content = $(form).find('textarea')[0].value;
+                        console.log(content);
+                        $(form).find("input[name='Content']").val(content);
+                    }
+                    var total = Number($("#total").val());
+                    var qid = Number($(form).find("input[name='qindex']")[0].value);
+                    console.log(total, qid);
+                    if (qid < total) {
+                        $(form).ajaxSubmit(function (res) {
+                            if (res.code === 1) {
+                                layer.msg('提交成功', { icon: 6 });
+                                $('#' + qid).hide();
+                                var next = qid + 1;
+                                $('#' + next).show();
+                            } else {
+                                layer.msg('提交失败', { icon: 5 });
+                            }
+                        })
+                    } else {
+                        layer.msg('你已经做完了', { icon: 1 });
+                        $(form).find("input[name='isend']").val('1');
+                        $(form).ajaxSubmit(function (res) {
+                            if (res.code === 1) {
+                                layer.msg('提交成功', { icon: 6 });
+                                window.location = '/Ques/UserAnswerLogList?pageIndex=1';
+                            } else {
+                                layer.msg('提交失败', { icon: 5 });
+                            }
+                        })
+                    }
+
+                    return false;
+                    
+                }
+            })
+        }
+       
+    </script>
+}

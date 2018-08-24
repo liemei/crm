@@ -1,0 +1,62 @@
+﻿@model bnuxq.Model.EmailTemplate
+@{
+    ViewData["Title"] = "添加邮件模板";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>添加邮件模板</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div class="layui-col-md6">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="Title" placeholder="请输入邮箱标题" required lay-verify="required" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮件模板</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="EmailContent" rows="30" placeholder="请输入邮件模板" required lay-verify="required"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer;
+        layui.use(['form', 'layer','element'], function () {
+            var form = layui.form;
+            var element = layui.element;
+            layer = layer;
+
+            form.on('submit(*)', function (data) {
+
+                $.post('/EmailManage/SaveEmailTemp',
+                    data.field,
+                    function(res) {
+                        if (res.code == 1) {
+                            layer.msg('保存成功', { icon: 6 });
+                            window.location = '/EmailManage/EmailTemplateList';
+                        } else {
+                            layer.msg('保存失败', { icon: 5 });
+                        }
+                    });
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+
+    </script>
+}
+

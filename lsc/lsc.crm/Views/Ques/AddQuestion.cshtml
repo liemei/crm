@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "添加题目";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+<form class="layui-form" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">题目内容</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="Content" required lay-verify="required" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">题目类型</label>
+        <div class="layui-input-inline">
+            <select name="QType">
+                <option value="1">单选题</option>
+                <option value="2">多选题</option>
+                <option value="3">问答题</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button class="layui-btn" lay-submit lay-filter="logform">立即提交</button>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script type="text/javascript">
+        var layer
+        layui.use(['layer', 'form'], function () {
+            layer = layui.layer
+            var form = layui.form;
+
+            form.on('submit(logform)', function (data) {
+                $.post("/Ques/SaveQuestion", data.field, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        window.location = '/Ques/AddOption?questionId=' + res.id;
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+                return false;
+            });
+        })
+    </script>
+}
+

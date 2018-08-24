@@ -1,0 +1,129 @@
+﻿@using bnuxq.Model
+@{
+    ViewData["Title"] = "添加销售项目信息";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<UserInfo> userlist = ViewBag.userlist;
+}
+<blockquote class="layui-elem-quote">
+    添加销售项目
+</blockquote>
+<div class="manage-form-container">
+    <form class="layui-form" method="post" id="adform">
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="Title" class="layui-input layui-form-text" required lay-verify="required" placeholder="请输入项目标题"autocomplete="off" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目概要</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入项目概要" class="layui-textarea" name="ProjectAbstract"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目状态</label>
+            <div class="layui-input-block">
+                <select name="ProjectState" class="layui-form-select">
+                    <option value="0">进行中</option>
+                    <option value="1">成功</option>
+                    <option value="2">失败</option>
+                    <option value="3">搁置</option>
+                    <option value="4">放弃</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目类型</label>
+            <div class="layui-input-block">
+                <select name="ProjectType" class="layui-form-select">
+                    <option value="1">大项目</option>
+                    <option value="2">中项目</option>
+                    <option value="3">小项目</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目负责人</label>
+            <div class="layui-input-block">
+                <select name="HeadID" class="layui-form-item">
+                    @if (userlist!=null && userlist.Count>0)
+                    {
+                        foreach (var user in userlist)
+                        {
+                            <option value="@user.ID">@user.Name</option>
+                         }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">立项时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="ProjectTime" id="ProjectTime" class="layui-input layui-form-text" readonly required lay-verify="required|date"  />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目金额</label>
+            <div class="layui-input-block">
+                <input type="number" lay-verify="number" name="ProjectAmt" id="ProjectAmt" class="layui-input layui-form-text" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">预计到款时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="ReceoverPayTime" id="ReceoverPayTime" class="layui-input layui-form-text" readonly required lay-verify="required|date" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="hidden" name="EnterCustomerID" value="@(ViewBag.EnterCustomerID)" />
+                <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var layer
+        layui.use(['form', 'laydate', 'layer','element'], function () {
+            var form = layui.form;
+            var laydate = layui.laydate;
+            var element = layui.element
+            layer = layer;
+
+            laydate.render({
+                elem: '#ProjectTime', //指定元素
+                type: 'date',
+                format :'yyyy-MM-dd'
+            });
+            laydate.render({
+                elem: '#ReceoverPayTime', //指定元素
+                type: 'date',
+                format: 'yyyy-MM-dd'
+            });
+
+            form.on('submit(*)', function (data) {
+                console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+                console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+                console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+                $.post('/EnterCustom/SaveSalesProject', data.field, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        window.location = '/EnterCustom/Index'
+                    } else { 
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+       
+    </script>
+ }
+

@@ -1,0 +1,109 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.TargetEmail>
+@{
+    ViewData["Title"] = "目标邮件管理";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<blockquote class="layui-elem-quote">
+    目标邮箱管理
+    <a href="http://Resources.bnuxq.com:8082\docfile\excel\邮箱上传模板.xlsx" class="layui-btn layui-btn-normal">下载模板</a>
+        <button class="layui-btn test" lay-data="{url: '/UploadApi/uploadTagEmail', accept: 'file'}">上传邮箱信息</button>
+</blockquote>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>目标邮箱管理</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>邮箱</th>
+                <th>姓名</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model != null)
+            {
+                foreach (var targetEmail in Model)
+                {
+                    <tr>
+                        <td>@(targetEmail.Email)</td>
+                        <td>@(targetEmail.Name)</td>
+                        <td><a href="javascript:;" class="layui-btn layui-btn-danger" onclick="del('@(targetEmail.Id)')">删除</a></td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var layer, form;
+        layui.use(['element', 'layer', 'upload', 'table', 'laypage'],
+            function() {
+                var element = layui.element;
+                layer = layui.layer;
+                var upload = layui.upload;
+                var table = layui.table;
+                var laypage = layui.laypage;
+                //分页
+                laypage.render({
+                    elem: 'page' //分页容器的id
+                    , count: @(ViewBag.count) //总页数
+                    ,limit:@(ViewBag.pageSize)
+                    , skin: '#1E9FFF' //自定义选中色值
+                    //,skip: true //开启跳页
+                    ,curr: @(ViewBag.pageIndex) //获取起始页
+                    , jump: function (obj, first) {
+                        if (!first) {
+                            window.location =
+                                '/EmailManage/TargetEmailList?pageIndex=' +
+                                obj.curr;
+                        }
+                    }
+                    , hash: 'fenye' //自定义hash值
+                });
+                // 文件上传组件
+                upload.render({
+                    elem: '.test',
+                    exts: 'xlsx',
+                    done: function(res, index, upload) {
+                        console.log(res)
+                        //获取当前触发上传的元素，一般用于 elem 绑定 class 的情况，注意：此乃 layui 2.1.0 新增
+                        if (res.code == 0 && res.msg == 'OK') {
+                            if (res.data != null && res.data.src != null) {
+                                layer.msg('上传成功,部分信息有错误', { icon: 6 });
+                                $(".layui-elem-quote").append("<a class=\"layui-btn layui-btn-normal\" href=\"" +
+                                    res.data.src +
+                                    "\" target=\"_blank\">点击查看失败信息</a>");
+
+                            } else {
+                                layer.msg('上传成功', { icon: 6 });
+                                window.location.reload();
+                            }
+
+                        }
+
+                    }
+                });
+            });
+
+        del = function (id) {
+            layer.confirm('是否删除？', { icon: 3, title: '删除提示' }, function (index) {
+                $.get('/EmailManage/DelEmail?id=' + id,
+                    function(res) {
+                        if (res.code == 1) {
+                            layer.msg('成功', { icon: 6 });
+                            window.location.reload();
+                        } else {
+                            layer.msg('失败', { icon: 5 });
+                        }
+                    });
+                layer.close(index);
+            });
+        }
+    </script>
+}

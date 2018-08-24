@@ -1,0 +1,3 @@
+09:40:10.3473470 >ERROR> UserAnswerLogDal.GetList > Unknown column 'x.Duration' in 'field list',MySqlConnector
+09:40:13.8682322 >ERROR> UserAnswerLogDal.GetList > Unknown column 'x.Duration' in 'field list',MySqlConnector
+09:40:27.4071138 >ERROR> UserAnswerLogDal.GetList > Unknown column 'x.Duration' in 'field list',MySqlConnector

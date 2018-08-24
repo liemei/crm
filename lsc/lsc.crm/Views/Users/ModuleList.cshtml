@@ -1,0 +1,79 @@
+﻿@model IEnumerable<bnuxq.Model.ModuleInfo>
+
+@{
+    ViewData["Title"] = "模块管理";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+<blockquote class="layui-elem-quote">
+    本页面系统中所有功能模块列表
+    <a class="layui-btn layui-btn-normal" href="javascript:;" target="_blank" onclick="Addmodule()">添加模块</a>
+</blockquote>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>模块列表</legend>
+</fieldset>
+<table class="layui-table">
+    <colgroup>
+        <col width="120" />
+        <col width="150" />
+        <col width="60" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>模块ID</th>
+            <th>模块名称</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.ID</td>
+                    <td>@m.Name</td>
+                    <td><a href="javascript:;" onclick="Del('@m.ID')">删除</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+<script type="text/javascript">
+    var layer,$
+    layui.use(['layer','element'], function () {
+        var element = layui.element
+        layer = layui.layer;
+        $ = layui.$
+    })
+    function Addmodule(){
+        layer.prompt({ title: '请输入模块名称：', formType: 3 }, function (text, index) {
+            layer.close(index);
+            $.post('/Users/AddModule', { name: text }, function (res) {
+                if (res.code === 1) {
+                    window.location.reload()
+                }
+            })
+        });
+    }
+    function Del(id) {
+        layer.confirm('是否删除该模块？', {
+            btn: ['删除', '取消'] //按钮
+        }, function () {
+            $.get('/Users/DelModel?id=' + id, function (res) {
+                if (res.code === 1) {
+                    layer.msg('删除成功', { icon: 6 });
+                    window.location.reload()
+                } else {
+                    layer.msg('删除失败', { icon: 5 });
+                }
+            })
+        }, function () {
+        });
+    }
+  
+</script>
+}

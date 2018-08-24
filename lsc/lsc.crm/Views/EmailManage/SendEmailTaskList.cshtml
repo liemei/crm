@@ -1,0 +1,47 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.SendEmailTask>
+@{
+    ViewData["Title"] = "邮件发送任务";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>邮件发送日志</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>任务名称</th>
+                    <th>创建日期</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var sendEmailTask in Model)
+                    {
+                        <tr>
+                            <td>@(sendEmailTask.TaskName)</td>
+                            <td>@(sendEmailTask.CreateTime.ToString("yyyy-MM-dd"))</td>
+                            <td><a href="/EmailManage/SendEmailLogList?sendEmailTaskId=@(sendEmailTask.Id)&pageIndex=1">查看邮件发送日志</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var layer;
+        layui.use(['element', 'layer', 'table'],
+            function() {
+                var element = layui.element;
+                layer = layui.layer;
+                var table = layui.table;
+            });
+    </script>
+}
+

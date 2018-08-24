@@ -1,0 +1,135 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@model List<WorkPlan>
+@{
+    ViewData["Title"] = "工作计划";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<EnterCustomer> elist = ViewBag.elist;
+}
+
+<blockquote class="layui-elem-quote">
+    工作计划
+    <a class="layui-btn layui-btn-normal" href="javascript:;" onclick="addplan('0')">添加工作计划</a>
+</blockquote>
+<table class="layui-table">
+    <thead>
+        <tr>
+            <th>计划内容</th>
+            <th>客户名称</th>
+            <th>计划时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model!=null)
+        {
+            foreach (var info in Model)
+            {
+                string name = string.Empty;
+                int id = 0;
+                if (elist!=null)
+                {
+                    var e = elist.FirstOrDefault(x=>x.ID==info.EnterCustID);
+                    if (e!=null)
+                    {
+                        name = e.EnterName;
+                        id = e.ID;
+                     }
+                }
+                <tr>
+                    <td>@info.PlanContent</td>
+                    <td><a href="/EnterCustom/EnterCustomInfo?id=@(info.EnterCustID)">@name</a> </td>
+                    <td>@info.PlanTime.ToString("yyyy-MM-dd")</td>
+                    <td style="@(info.WorkPlanState== WorkPlanStateEnum.NoFinish ? "color:#F581B1":"")">@info.WorkPlanState.TryToStr()</td>
+                    <td>
+                        <div class="layui-btn-group">
+                            @if (info.EnterCustID > 0)
+                            {
+                                <a href="javascript:;" class="layui-btn layui-btn-small" onclick="showcontroller('@(info.EnterCustID)')">查看联系方式</a>
+                                <a class="layui-btn layui-btn-small" onclick="updatephase('@info.EnterCustID')">添加联系记录</a>
+                                <a class="layui-btn layui-btn-small" onclick="addplan('@info.EnterCustID')">预约下次</a>
+                            }
+                            <a href="javascript:;" class="layui-btn layui-btn-small" onclick="finish('@(info.ID)')">完成</a>
+                            <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(info.ID)')"><i class="layui-icon">&#xe640;</i>删除</a>
+                        </div>
+                    </td>
+                </tr>
+             }
+        }
+    </tbody>
+</table>
+<div id="page"></div>
+@section Scripts{
+<script>
+    var layer
+    layui.use(['table', 'element', 'layer','laypage'], function(){
+        var table = layui.table;
+        layer = layui.layer
+        laypage = layui.laypage
+        //分页
+            laypage.render({
+                elem: 'page' //分页容器的id
+                , count: @(ViewBag.count) //总页数
+                ,limit:30
+                , skin: '#1E9FFF' //自定义选中色值
+                //,skip: true //开启跳页
+                ,curr: @(ViewBag.pageIndex) //获取起始页
+                , jump: function (obj, first) {
+                    console.log(obj)
+                    if (!first) {
+                        window.location = '/EnterCustom/WorkPlanIndex?pageIndex=' + obj.curr;
+                    }
+                }
+                , hash: 'fenye' //自定义hash值
+            });
+    });
+    finish = function (id) {
+        $.get("/EnterCustom/FinishPlan?id=" + id, function (res) {
+            window.location.reload();
+         })
+    }
+    del = function (id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.get("/EnterCustom/DelPlan?id=" + id, function (res) {
+                layer.msg('删除成功', { icon: 1 });
+                window.location.reload();
+            })
+        }, function () {
+
+        });
+    }
+    var showcontroller = function (id) {
+        layer.open({
+            type: 2,
+            title: '联系人列表',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1200px', '50%'],
+            content: '/EnterCustom/EnterCustContactsList?EnterCustID=' + id
+        });
+    }
+    updatephase = function (id) {
+        layer.open({
+            type: 2,
+            title: '更新客户所处阶段',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1200px', '70%'],
+            content: '/EnterCustom/AddEnterCustPhaseLog?id=' + id
+        });
+    }
+    addplan = function (id) {
+        layer.open({
+            type: 2,
+            title: '添加工作计划',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['400px', '40%'],
+            content: '/EnterCustom/AddWorkPlan?EnterCustID=' + id
+        });
+    }
+</script>
+}

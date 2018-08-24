@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "添加销售项目变动日志";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+
+<form class="layui-form" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-inline">
+            <select class="layui-form-select" name="ProjectState">
+                <option value="0">进行中</option>
+                <option value="1">成功</option>
+                <option value="2">失败</option>
+                <option value="3">搁置</option>
+                <option value="4">放弃</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea layui-hide" name="Rem" lay-verify="content" id="Rem" required></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <input type="hidden" name="SalesProjectID" value="@(ViewBag.SalesProjectID)" />
+            <button class="layui-btn" lay-submit lay-filter="logform">立即提交</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+        var layer
+        layui.use(['layer', 'form','layedit'], function () {
+            layer = layui.layer
+            var form = layui.form;
+            var layedit = layui.layedit
+            // 创建一个编辑器
+            layedit.set({
+                uploadImage: {
+                    url: '/UploadApi/uploadImage' //接口url
+                    , type: 'post' //默认post
+                }
+            });
+
+            var editIndex = layedit.build('Rem', {
+                height: 370 //设置编辑器高度
+            });
+            form.on('submit(logform)', function (data) {
+                layedit.sync(editIndex)
+                data.field.Rem = layedit.getContent(editIndex)
+                $.post("/EnterCustom/SaveSalesProjectStateLog", data.field, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+                return false;
+            });
+
+            form.verify({
+                Rem: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    layedit.sync(editIndex);
+                    if (value.length < 30) {
+                        return '说明至少要50个字'
+                    }
+                }
+            });
+        })
+</script>

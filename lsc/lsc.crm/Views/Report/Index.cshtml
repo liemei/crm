@@ -1,0 +1,130 @@
+﻿
+@model List<bnuxq.crm.ViewModel.UserReportViewModel>
+
+@{
+    ViewData["Title"] = "基本数据统计";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<blockquote class="layui-elem-quote">
+    在基本数据统计中默认查询当前月份的数据，可以选择时间段查询对应时间段内各个人员的销售状况统计信息
+</blockquote>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>基本统计信息查询</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form" method="post" action="/Report/Index" id="queryform">
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="startTime" id="startTime" value="@ViewBag.startTime" />
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="endTime" id="endTime" value="@ViewBag.endTime" />
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <div class="layui-input-block">
+                    <input type="hidden" value="1" name="page" />
+                    <button class="layui-btn" lay-submit lay-filter="*">查询</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="layui-row" id="content_table">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>客户量</th>
+                    <th>电话量</th>
+                    <th>成单量</th>
+                    <th>应收账款</th>
+                    <th>回款金额</th>
+                    <th>月目标金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model!=null)
+                {
+                    foreach (var info in Model)
+                    {
+                        <tr>
+                            <td>@info.UserName</td>
+                            <td><a href="javascript:;" onclick="custlist('@(info.UserID)')">@info.CustomorTotal</a> </td>
+                            <td><a href="javascript:;" onclick="phoneloglist('@(info.UserID)')">@info.PhoneTotal</a> </td>
+                            <td>@info.SalesProjectTotal</td>
+                            <td>@info.ReceoverPay</td>
+                            <td>@info.HReceoverPay</td>
+                            <td>@info.TargetAmt</td>
+                        </tr>
+                     }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var layer, form, table, laydate
+        layui.use(['form', 'element', 'table', 'laydate','layer'], function () {
+            form = layui.form
+            layer = layui.layer
+            table = layui.table
+            laydate = layui.laydate
+
+            form.on('submit(*)', function (data) {
+                $("input[name='page']").val(1)
+                $.post('/EnterCustom/Index', data.field, function (res) {
+                })
+                //return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+
+            laydate.render({
+                elem: '#startTime'
+            });
+            laydate.render({
+                elem: '#endTime'
+            });
+        })
+
+
+        custlist = function (userid) {
+            var startTime = $("#startTime").val();
+            var endTime = $("#endTime").val();
+            layer.open({
+                type: 2,
+                title: '客户信息列表',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['1200px', '90%'],
+                content: '/EnterCustom/CustomorTotalLReport?userid=' +
+                    userid +
+                    '&startTime=' +
+                    startTime +
+                    '&endTime=' +
+                    endTime
+        });
+        }
+        phoneloglist = function (userid) {
+            var startTime = $("#startTime").val();
+            var endTime = $("#endTime").val();
+            layer.open({
+                type: 2,
+                title: '电话沟通列表',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['1200px', '90%'],
+                content: '/EnterCustom/PhoneTotalReport?userid=' + userid +
+                '&startTime=' +
+                startTime +
+                '&endTime=' +
+                endTime
+            });
+        }
+    </script>
+}

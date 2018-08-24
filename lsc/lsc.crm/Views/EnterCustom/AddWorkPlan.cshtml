@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "添加工作计划";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+<form class="layui-form" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">计划内容</label>
+        <div class="layui-input-inline">
+            <textarea name="PlanContent" class="layui-textarea" required lay-verify="required"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">计划时间</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" readonly id="PlanTime" name="PlanTime" placeholder="yyyy-MM-dd" required lay-verify="required" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <input type="hidden" name="EnterCustID" value="@(ViewBag.EnterCustID)" />
+            <button class="layui-btn" lay-submit lay-filter="logform">立即提交</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+        var layer
+        layui.use(['layer', 'form','laydate'], function () {
+            layer = layui.layer
+            var form = layui.form;
+            var layedit = layui.layedit
+            var laydate = layui.laydate
+            laydate.render({
+                elem: '#PlanTime'
+            });
+            form.on('submit(logform)', function (data) {
+                $.post("/EnterCustom/SaveWorkPlan", data.field, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+                return false;
+            });
+        })
+</script>
+
+
+
+

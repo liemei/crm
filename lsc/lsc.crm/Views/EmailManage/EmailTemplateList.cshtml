@@ -1,0 +1,72 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.EmailTemplate>
+
+@{
+    ViewData["Title"] = "邮件模板管理";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<blockquote class="layui-elem-quote">
+    邮件模板管理
+    <a  class="layui-btn layui-btn-normal" href="/EmailManage/AddEmailTemp" >添加模板</a>
+</blockquote>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>邮件模板管理</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>邮件标题</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model != null)
+            {
+                foreach (var emailTemplate in Model)
+                {
+                    <tr>
+                        <td>@(emailTemplate.Title)</td>
+                        <td>@(emailTemplate.CreateTime.ToString("yyyy-MM-dd"))</td>
+                        <td>
+                            <div class="layui-btn-group">
+                                <a href="/EmailManage/CreateSendEmailTask?emailtempId=@(emailTemplate.Id)" class="layui-btn">使用模板发送邮件</a>
+                                <a href="javascript:;" class="layui-btn layui-btn-danger" onclick="del('@(emailTemplate.Id)')">删除</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer, form;
+        layui.use(['element', 'layer', 'table'],
+            function() {
+                var element = layui.element;
+                layer = layui.layer;
+                var table = layui.table;
+            });
+
+        del = function (id) {
+            layer.confirm('是否删除？', { icon: 3, title: '删除提示' }, function (index) {
+                $.get('/EmailManage/DelEmailTemp?id=' + id,
+                    function(res) {
+                        if (res.code == 1) {
+                            layer.msg('成功', { icon: 6 });
+                            window.location.reload();
+                        } else {
+                            layer.msg('失败', { icon: 5 });
+                        }
+                    });
+                layer.close(index);
+            });
+        }
+    </script>
+}

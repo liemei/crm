@@ -1,0 +1,83 @@
+﻿@using bnuxq.Model
+@model List<bnuxq.Model.UserAnswerLog>
+
+@{
+    ViewData["Title"] = "答题";
+    Layout = "~/Pages/_Layout.cshtml";
+    bool flag = ViewBag.flag;
+}
+
+<blockquote class="layui-elem-quote">
+    答题记录
+    <a class="layui-btn layui-btn-normal" href="javascript:;" onclick="@(flag?"startOk()":"startEr()")">开始答题</a>
+</blockquote>
+<div class="layui-row">
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th>测试时间</th>
+                <th>分数</th>
+                <th>耗时</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (UserAnswerLog userAnswerLog in Model)
+                {
+                    <tr>
+                        <td>@(userAnswerLog.CreateTime.ToString("yyyy-MM-dd hh:mm:ss"))</td>
+                        <td>@(userAnswerLog.TotalScore)</td>
+                        <td>@(userAnswerLog.Duration)分钟</td>
+                        <td><a href="/Ques/UserAnswerLogInfo?logId=@(userAnswerLog.Id)">查看答题情况</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div id="page"></div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer, form
+        layui.use(['element', 'layer', 'laypage', 'table', 'form'],
+            function() {
+                form = layui.form;
+                layer = layui.layer;
+                var laypage = layui.laypage;
+                var table = layui.table;
+
+                //分页
+                laypage.render({
+                    elem: 'page' //分页容器的id
+                    ,
+                    count: @(ViewBag.total) //总页数
+                    ,
+                    limit: 35,
+                    skin: '#1E9FFF' //自定义选中色值
+                    //,skip: true //开启跳页
+                    ,
+                    curr: @(ViewBag.pageIndex) //获取起始页
+                    ,
+                    jump: function(obj, first) {
+                        console.log(obj)
+                        if (!first) {
+                            window.location = '/Ques/UserAnswerLogList?pageIndex=' + obj.curr;
+                        }
+                    },
+                    hash: 'fenye' //自定义hash值
+                });
+            });
+        var startEr = function() {
+            layer.msg('题库中题数过少暂时不能答题', { icon: 5 });
+            return false;
+        }
+        var startOk = function() {
+            windows.location = "/Ques/StartAnswer";
+        }
+    </script>
+}
+
+

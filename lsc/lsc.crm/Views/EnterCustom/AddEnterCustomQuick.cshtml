@@ -1,0 +1,470 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@{
+    ViewData["Title"] = "快速录入客户信息";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<DistrictInfo> ProvinceList = ViewBag.ProvinceList;
+}
+
+
+<blockquote class="layui-elem-quote">
+    添加客户信息
+</blockquote>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <form class="layui-form" method="post" id="addform" action="/EnterCustom/SaveEnterAndCust">
+            <div class="layui-col-md6" style="padding: 10px;">
+                <div class="layui-card">
+                    <div class="layui-card-header">客户信息</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客户全称</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text" name="EnterName" id="EnterName" value="" placeholder="请输入客户名称" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客户类型</label>
+                            <div class="layui-input-block">
+                                <select class="layui-form-select" name="CustomerType" lay-search>
+                                    <option value=""></option>
+                                    <option value="1">代理经销商</option>
+                                    @*<option value="2" @(Model != null && Model.CustomerType == CustomerTypeEnum.Ordinary ? "selected" : "")>普通客户</option>
+                                <option value="3" @(Model != null && Model.CustomerType == CustomerTypeEnum.BigCustomer ? "selected" : "")>集团大客户</option>
+                                <option value="4" @(Model != null && Model.CustomerType == CustomerTypeEnum.Cooperation ? "selected" : "")>业务合作商</option>
+                                <option value="5" @(Model != null && Model.CustomerType == CustomerTypeEnum.Same ? "selected" : "")>怀疑同行</option>*@
+                                    <option value="6">高校</option>
+                                    <option value="7">教委</option>
+                                    <option value="8">中职</option>
+                                    <option value="9">中学</option>
+                                    <option value="10">小学</option>
+                                    <option value="11">特教</option>
+                                    <option value="12">监狱</option>
+                                    <option value="13">戒毒所</option>
+                                    <option value="14">公检法</option>
+                                    <option value="15">武警部队</option>
+                                    <option value="16">医院</option>
+                                    <option value="17">其他客户</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">阶段</label>
+                            <div class="layui-input-block">
+                                <select class="layui-form-select" name="Phase">
+                                    <option value=""></option>
+                                    <option value="1">售前跟踪</option>
+                                    <option value="2">需求确定</option>
+                                    <option value="3">售中跟单</option>
+                                    <option value="4">签约洽谈</option>
+                                    <option value="5">成交售后</option>
+                                    <option value="6">跟单失败</option>
+                                    <option value="7">暂且搁置</option>
+                                    <option value="8">其他阶段</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客户来源</label>
+                            <div class="layui-input-block">
+                                <select class="layui-form-select" name="Source">
+                                    <option value=""></option>
+                                    <option value="1">客户来电</option>
+                                    <option value="2">主动挖掘</option>
+                                    <option value="3">网站咨询</option>
+                                    <option value="4">客户介绍</option>
+                                    <option value="6">招标</option>
+                                    <option value="7">展会</option>
+                                    <option value="8">QQ&微信群</option>
+                                    <option value="5">其他来源</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">省份</label>
+                            <div class="layui-input-block">
+                                <select class="layui-form-select" name="Province" lay-filter="Province" lay-search>
+                                    <option value=""></option>
+                                    @if (ProvinceList != null && ProvinceList.Count > 0)
+                            {
+                                foreach (var p in ProvinceList)
+                                {
+                                    <option value="@p.Name" data-id="@p.ID">@p.Name</option>
+                        }
+                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">城市</label>
+                            <div class="layui-input-block">
+                                <select class="layui-form-select" name="City" lay-filter="City" lay-search>
+                                    <option value=""></option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">热点客户</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="IsHeat" lay-skin="switch">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">热度</label>
+                            <div class="layui-input-block">
+                                <select class="layui-form-select" name="DegreeOfHeat">
+                                    <option value=""></option>
+                                    <option value="1">高热</option>
+                                    <option value="2">中热</option>
+                                    <option value="3">低热</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客户简介</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="请输入客户简介" class="layui-textarea" name="CustAbstract"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="请输入备注信息" class="layui-textarea" name="Rem"></textarea>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-md6" style="padding: 10px;">
+                <div class="layui-card">
+                    <div class="layui-card-header">联系人信息</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text" value="" name="Name" placeholder="请输入名称" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block" id="sexdiv">
+                                <input type="radio" name="sex" value="1" title="男" >
+                                <input type="radio" name="sex" value="2" title="女">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">负责业务</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text" name="Business" placeholder="请输入负责业务" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">部门</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text"  name="Department" placeholder="请输入联系人所在部门" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">职务</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text"  name="Duties" placeholder="请输入联系人职务" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text" onchange="telonchanged()"  name="Telephone" id="Telephone" placeholder="请输入手机号" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">固定电话</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text" onchange="phonechanged()"  name="Landline" id="Landline" placeholder="请输入手机号" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">邮箱</label>
+                            <div class="layui-input-block">
+                                <input type="email" class="layui-input layui-form-text" onchange="emailchanged()"  name="Email" id="Email" placeholder="请输入邮箱" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">QQ</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text" onchange="qqchanged()"  name="QQ" id="QQ" placeholder="请输入QQ号" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">微信号</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text" onchange="wechartchanged()"  name="WeChart" id="WeChart" placeholder="请输入微信号" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">住址</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input layui-form-text"  name="Address" placeholder="请输入住址" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-block">
+                                <textarea name="Rem" class="layui-form-text layui-input" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="hidden" name="mobile" id="mobile"  />
+                                <input type="hidden" name="emails" id="emails"  />
+                                <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+      
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/layui/jquery.validate.js"></script>
+    <script src="~/layui/jquery.form.js"></script>
+    <script type="text/javascript">
+        var form, layer
+        layui.use(['form', 'element', 'layer'],
+            function() {
+                layer = layui.layer
+                form = layui.form
+                form.on('select(Province)',
+                    function(data) {
+                        citylist();
+                    });
+            })
+        jQuery.validator.addMethod("isPhone",
+            function(value, element) {
+                var length = value.length;
+                var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+                return this.optional(element) || (length == 11 && mobile.test(value));
+            },
+            "请填写正确的手机号码");
+
+        jQuery.validator.addMethod("isTel",
+            function(value, element) {
+                var length = value.length;
+                var phone = /^\d{3,4}-\d{7,8}$/;
+                return this.optional(element) || (phone.test(value));
+            },
+            "请填写正确的固定电话");
+
+        jQuery.validator.addMethod("isQQ",
+            function(value, element) {
+                var length = value.length;
+                var qq = /^[1-9][0-9]{4,9}$/;
+                return this.optional(element) || (qq.test(value));
+            },
+            "请填写正确的QQ号");
+        $('#addform').validate({
+            ignore: "",
+            rules: {
+                EnterName: {
+                    required: true,
+                    maxlength: 64,
+                    remote: {
+                        url: "/EnterCustom/ExistsEnterName",
+                        type: 'get',
+                        data: {
+                            id: function() {
+                                return $("#ID").val();
+                            },
+                            EnterName: function() {
+                                return $("#EnterName").val();
+                            }
+                        },
+                        dataFilter: function(data, type) {
+                            var jdata = JSON.parse(data);
+                            if (jdata.result) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    }
+                },
+                CustomerType: {
+                    required: true
+                },
+                Source: {
+                    required: true
+                },
+                Province: {
+                    required: true
+                },
+                City: {
+                    required: true
+                },
+                Phase: {
+                    required: true
+                },
+                Name: {
+                    required: true,
+                    maxlength: 64
+                },
+                sex: {
+                    required: true
+                },
+                Telephone: {
+                    isPhone: true
+                },
+                Landline: {
+                    isTel: true
+                },
+                mobile: {
+                    required: true
+                },
+                Email: {
+                    email: true
+                },
+                QQ: {
+                    isQQ: true
+                },
+                emails: {
+                    required: true
+                }
+            },
+            messages: {
+                EnterName: {
+                    required: "请输入客户名称",
+                    maxlength: "客户名称最多64个字",
+                    remote: "客户名称已存在"
+                },
+                CustomerType: {
+                    required: "请选择客户类型"
+                },
+                Source: {
+                    required: "请选择客户来源"
+                },
+                Province: {
+                    required: "请选择省份"
+                },
+                City: {
+                    required: "请选择城市"
+                },
+                Phase: {
+                    required: "请选择现在所处的阶段"
+                },
+                Name: {
+                    required: "请输入联系人姓名",
+                    maxlength: "联系人名称最多64个字"
+                },
+                sex: {
+                    required: "请选择性别"
+                },
+                Telephone: {
+                    isPhone: "请输入正确格式的手机号"
+                },
+                Landline: {
+                    Landline: "请输入正确格式的固定电话号"
+                },
+                mobile: {
+                    required: "手机号和固话号至少填一个"
+                },
+                Email: {
+                    email: "请输入正确格式的邮箱"
+                },
+                QQ: {
+                    isQQ: "请输入正确的QQ号"
+                },
+                emails: {
+                    required: "邮箱、QQ、微信号至少填写一个"
+                }
+            },
+            errorPlacement: function(error, element) {
+                console.log(element.parent());
+                if (element.attr("name") == "mobile") {
+                    error.insertAfter("#Landline");
+                } else if (element.attr("name") == "emails") {
+                    error.insertAfter("#WeChart");
+                } else if (element.attr("name") == "sex") {
+                    error.insertAfter("#sexdiv");
+                } else {
+                    element.parent().append(error);
+                }
+                //if (element.is(":radio"))
+                //    error.appendTo(element.parent().next().next());
+                //else if (element.is(":checkbox"))
+                //    error.appendTo(element.next());
+                //else
+                //    error.appendTo(element.parent().next());
+
+            },
+            submitHandler: function(form) {
+                layer.load(0, { shade: false });
+                $(form).ajaxSubmit(function(res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        window.location = '/EnterCustom/AddEnterCustPhaseLog?types=1&id=' + res.id;
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                });
+            }
+        });
+        citylist = function() {
+            var pid = $("select[name='Province']").find('option:selected').attr('data-id')
+            $.get('/EnterCustom/GetCityList?id=' + pid,
+                function(result) {
+                    if (result.code == 1) {
+                        $("select[name='City'] option").each(function() {
+                            if ($(this).val() != '') {
+                                $(this).remove();
+                            }
+                        })
+                        for (var i = 0; i < result.citylist.length; i++) {
+                            $("select[name='City']").append("<option value='" +
+                                result.citylist[i].name +
+                                "'>" +
+                                result.citylist[i].name +
+                                "</option>")
+                        }
+                        form.render('select');
+                    }
+                })
+        }
+        var telonchanged = function() {
+            console.log($("input[name='Telephone']").val());
+            $("#mobile").val($("input[name='Telephone']").val() + $("input[name='Landline']").val());
+        }
+        var phonechanged = function() {
+            $("#mobile").val($("input[name='Telephone']").val() + $("input[name='Landline']").val());
+        }
+        var emailchanged = function() {
+            var values = $("input[name='Email']").val() +
+                $("input[name='QQ']").val() +
+                $("input[name='WeChart']").val();
+            $("#emails").val(values);
+        }
+        var qqchanged = function() {
+            var values = $("input[name='Email']").val() +
+                $("input[name='QQ']").val() +
+                $("input[name='WeChart']").val();
+            $("#emails").val(values);
+        }
+        var wechartchanged = function() {
+            var values = $("input[name='Email']").val() +
+                $("input[name='QQ']").val() +
+                $("input[name='WeChart']").val();
+            $("#emails").val(values);
+        }
+    </script>
+}
+
+
+

@@ -1,0 +1,91 @@
+﻿@using bnuxq.Model.Enume
+@using bnuxq.Model
+@model List<bnuxq.Model.EnterCustomer>
+
+@{
+    Layout = null;
+    List<UserRoleJurisdiction> userrolejurlist = ViewData["userrolejurlist"] as List<UserRoleJurisdiction>;
+    List<ModuleInfo> modulelist = ViewData["modulelist"] as List<ModuleInfo>;
+    var module = modulelist.FirstOrDefault(x => x.Name == "公共客户池");
+    UserRoleJurisdiction usrrolejur = null;
+    if (module!=null)
+    {
+        usrrolejur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module.ID);
+    }
+}
+<table class="layui-table">
+    <thead>
+        <tr>
+            <th>客户名称</th>
+            <th>客户简介</th>
+            <th>种类</th>
+            <th>关系等级</th>
+            <th>价值评估</th>
+            <th>客户来源</th>
+            <th>阶段</th>
+            <th>是否是热点客户</th>
+            <th>热点分类</th>
+            <th>最后跟踪时间</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var ec in Model)
+            {
+                <tr>
+                    <td>@ec.EnterName</td>
+                    <td>@ec.CustAbstract</td>
+                    <td>@ec.CustomerType.TryToStr()</td>
+                    <td>@ec.Relationship.TryToStr()</td>
+                    <td>@ec.ValueGrade.TryToStr()</td>
+                    <td>@ec.Source.TryToStr()</td>
+                    <td>@ec.Phase.TryToStr()</td>
+                    <td>@(ec.IsHeat ? "是" : "否")</td>
+                    <td>@ec.HeatTYPE.TryToStr()</td>
+                    <td>@ec.UpdateTime.ToString("yyyy-MM-dd hh:mm:ss")</td>
+                    <td>@ec.Rem</td>
+                    <td>
+                    <div class="layui-btn-group">
+                        <a href="javascript:;" class="layui-btn layui-btn-small" onclick="useenter('@(ec.ID)')">领用</a>
+                        @if (usrrolejur != null && usrrolejur.IsAssignment)
+                        {
+                            <a href="javascript:;" class="layui-btn layui-btn-small" onclick="distribution('@(ec.ID)')">分配</a>
+                        }
+                        <a href="javascript:;" onclick="showcontroller('@(ec.ID)')" class="layui-btn layui-btn-small">查看联系人</a>
+                        <a href="/EnterCustom/AddEnterCustContacts?id=0&EnterCustID=@(ec.ID)" class="layui-btn layui-btn-small">添加联系人</a>
+                        @if (usrrolejur != null && usrrolejur.IsEdit)
+                        {
+                            <a href="/EnterCustom/AddEnterCustom?id=@(ec.ID)" class="layui-btn layui-btn-small">编辑</a>
+                        }
+                        @if (usrrolejur != null && usrrolejur.IsDelete)
+                        {
+                            <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(ec.ID)')">删除</a>
+                        }
+                    </div>
+                   </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div id="page"></div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer
+        layui.use(['table', 'laypage','layer'], function () {
+            table = layui.table
+            laypage = layui.laypage
+            layer = layui.layer
+            laypage.render({
+                elem: 'page' //注意，这里的 page 是 ID，不用加 # 号
+                , count: @(ViewBag.count) //数据总数，从服务端得到
+            });
+        })
+
+
+    </script>
+}

@@ -1,0 +1,18 @@
+10:05:21.8214609 >ERROR> QuestionsDal.GetList > Table 'bnuxq_crm.questionsdbset' doesn't exist,MySqlConnector
+10:06:46.0424649 >ERROR> QuestionsDal.GetList > Table 'bnuxq_crm.questionsdbset' doesn't exist,MySqlConnector
+10:12:09.4400994 >ERROR> QuestionsDal.GetList > Table 'bnuxq_crm.questionsdbset' doesn't exist,MySqlConnector
+10:12:40.3832709 >ERROR> QuestionsDal.GetList > Table 'bnuxq_crm.questionsdbset' doesn't exist,MySqlConnector
+10:12:58.3561537 >ERROR> QuestionsDal.GetList > Table 'bnuxq_crm.questionsdbset' doesn't exist,MySqlConnector
+10:13:10.6183597 >ERROR> QuestionsDal.GetList > Table 'bnuxq_crm.questionsdbset' doesn't exist,MySqlConnector
+10:13:43.3329706 >ERROR> QuestionsDal.add > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+14:10:07.7274766 >ERROR> UserAnswerLogDal.GetList > Table 'bnuxq_crm.useranswerlog' doesn't exist,MySqlConnector
+14:20:40.2106545 >ERROR> UserAnswerLogDal.GetList > Table 'bnuxq_crm.useranswerlog' doesn't exist,MySqlConnector
+18:14:52.0074683 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:14:53.0089568 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:14:54.0136346 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:17:38.3526035 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:17:39.3540975 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:18:16.3767942 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:18:17.3784077 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:22:30.9767901 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational
+18:23:33.5362097 >ERROR> UserAnswerDal.AddAsync > An error occurred while updating the entries. See the inner exception for details.,Microsoft.EntityFrameworkCore.Relational

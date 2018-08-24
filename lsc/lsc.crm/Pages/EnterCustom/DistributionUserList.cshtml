@@ -1,0 +1,67 @@
+﻿@page
+@model DistributionUserListModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>心企领航-CRM</title>
+    <link rel="stylesheet" href="~/layui/css/layui.css">
+    <link rel="stylesheet" href="~/layui/css/main.css">
+    <script type="application/javascript" src="~/layui/layui.js"></script>
+    <script type="application/javascript" src="~/layui/jquery.js"></script>
+    <script type="application/javascript" src="~/layui/jquery.validate.js"></script>
+    <script type="application/javascript" src="~/layui/jquery.form.js"></script>
+</head>
+<body>
+    <table class="layui-table">
+        <thead class="layui-table-header">
+            <tr>
+                <th>姓名</th>
+                <th>角色</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody class="layui-table-body">
+        @if(Model.UserList!=null)
+        {
+            foreach(var info in Model.UserList)
+            {
+                string rname = "";
+                if(Model.UserRoleList!=null)
+                {
+                    var userrole = Model.UserRoleList.FirstOrDefault(x => x.ID == info.RoleID);
+                    if(userrole!=null)
+                    {
+                        rname = userrole.RoleName;
+                    }
+                }
+                    <tr>
+                        <td>@info.Name</td>
+                        <td>@rname</td>
+                        <td><a href="javascript:;" class="layui-btn layui-btn-mini" onclick="dis('@info.ID')">分配</a></td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        var layer
+        layui.use('layer', function () {
+            layer = layui.layer
+        })
+        var dis = function (userid) {
+            $.get('/EnterCustom/DistrutionEc?userid=' + userid + '&eid=@(Model.ID)', function (res) {
+                if (res.code == 1) {
+                    layer.msg('分配成功', { icon: 6 });
+                } else { 
+                    layer.msg('分配失败', { icon: 5 });
+                }
+             })
+         }
+    </script>
+</body>
+</html>

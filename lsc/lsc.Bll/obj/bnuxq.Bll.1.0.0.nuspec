@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>bnuxq.Bll</id>
+    <version>1.0.0</version>
+    <authors>bnuxq.Bll</authors>
+    <owners>bnuxq.Bll</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp2.0">
+        <dependency id="bnuxq.Model" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="bnuxq.Common" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="bnuxq.Dal" version="1.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Bll\bin\Debug\netcoreapp2.0\bnuxq.Bll.dll" target="lib\netcoreapp2.0\bnuxq.Bll.dll" />
+  </files>
+</package>

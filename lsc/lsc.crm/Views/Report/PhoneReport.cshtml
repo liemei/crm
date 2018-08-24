@@ -1,0 +1,157 @@
+﻿@using bnuxq.Common
+@using bnuxq.Model
+
+@{
+    ViewData["Title"] = "每天电话量统计";
+    Layout = "~/Pages/_Layout.cshtml";
+
+    List<UserInfo> userlist = ViewBag.userlist;
+    List<EnterTotalReportForDay> list = ViewBag.list;
+}
+<blockquote class="layui-elem-quote">
+    可以选择开始时间和结束时间,查询一段时间之内每天的电话量
+</blockquote>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>每天电话量统计</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form" method="post" action="/Report/PhoneReport" id="queryform">
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="startTime" id="startTime" value="@ViewBag.startTime" />
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="endTime" id="endTime" value="@ViewBag.endTime" />
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <div class="layui-input-block">
+                    <input type="hidden" value="1" name="page" />
+                    <button class="layui-btn" lay-submit lay-filter="*">查询</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="layui-row" id="content_table">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>电话量</th>
+                    <th>日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (list != null)
+                {
+                    foreach (var info in list)
+                    {
+                        string username = string.Empty;
+                        if (userlist!=null)
+                        {
+                            var user = userlist.FirstOrDefault(x => x.ID == info.UserID);
+                            if (user!=null)
+                            {
+                                username = user.Name;
+                             }
+                        }
+                        <tr>
+                            <td>@username</td>
+                            <td><a href="javascript:;" onclick="phoneloglist('@(info.UserID)','@(info.Days)','@(info.Days.TryToDateTime().AddDays(1).ToString("yyyy-MM-dd"))')">@info.Total</a></td>
+                            <td>@info.Days</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="layui-row layui-container">
+        <div id="main" style="width: 1200px;height:600px;"></div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/echarts.js"></script>
+    <script type="text/javascript">
+        var layer, form, table, laydate
+        layui.use(['form', 'element', 'table','laydate'], function () {
+            form = layui.form
+            layer = layui.layer
+            table = layui.table
+            laydate = layui.laydate
+
+            //form.on('submit(*)', function (data) {
+            //    $("input[name='page']").val(1)
+            //    $.post('/EnterCustom/Index', data.field, function (res) {
+            //    })
+            //    //return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            //});
+
+            laydate.render({
+                elem: '#startTime'
+            });
+            laydate.render({
+                elem: '#endTime'
+            });
+        })
+        phoneloglist = function (userid, startTime, endTime) {
+            layer.open({
+                type: 2,
+                title: '电话沟通列表',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['1000px', '70%'],
+                content: '/EnterCustom/PhoneTotalReport?userid=' + userid +
+                    '&startTime=' +
+                    startTime +
+                    '&endTime=' +
+                    endTime
+            });
+        }
+        var myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: {
+                text: '各人每天电话量变化'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: @Html.Raw(ViewBag.userNames)
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: { readOnly: false },
+                    magicType: { type: ['line', 'bar'] },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: @Html.Raw(ViewBag.datalist)
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} 个'
+                }
+            },
+            series: @Html.Raw(ViewBag.seriesList)
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+}

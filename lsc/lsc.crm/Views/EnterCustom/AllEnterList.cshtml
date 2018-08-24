@@ -1,0 +1,401 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@model List<bnuxq.Model.EnterCustomer>
+@{
+    ViewData["Title"] = "客户管理";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<DistrictInfo> ProvinceList = ViewBag.ProvinceList;
+
+    List<UserRoleJurisdiction> userrolejurlist = ViewData["userrolejurlist"] as List<UserRoleJurisdiction>;
+    List<ModuleInfo> modulelist = ViewData["modulelist"] as List<ModuleInfo>;
+    var module = modulelist.FirstOrDefault(x => x.Name == "客户信息管理");
+    UserRoleJurisdiction usrrolejur = null;
+    if (module != null)
+    {
+        usrrolejur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module.ID);
+    }
+    List<UserInfo> userlist = ViewBag.userlist;
+    List<EnterCustContacts> eclist = ViewBag.eclist;
+}
+<blockquote class="layui-elem-quote">
+    在客户管理中展示了自己管理的客户信息，可以对客户进行相关操作
+    <a class="layui-btn layui-btn-normal" href="/EnterCustom/AddEnterCustom?id=0">添加客户</a>
+</blockquote>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>客户信息综合查询</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form" method="post" action="/EnterCustom/AllEnterList" id="queryform">
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">客户名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="EnterName" value="@(!string.IsNullOrEmpty(ViewBag.EnterName)? ViewBag.EnterName:"")" />
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">客户类型</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="CustomerType" lay-search>
+                        <option value=""></option>
+                        <option value="1" @(ViewBag.CustomerType == 1 ? "selected" : "" )>代理经销商</option>
+                        <option value="2" @(ViewBag.CustomerType == 2 ? "selected" : "" )>普通客户</option>
+                        <option value="3" @(ViewBag.CustomerType == 3 ? "selected" : "" )>集团大客户</option>
+                        <option value="4" @(ViewBag.CustomerType == 4 ? "selected" : "" )>业务合作商</option>
+                        <option value="5" @(ViewBag.CustomerType == 5 ? "selected" : "" )>怀疑同行</option>
+                        <option value="6" @(ViewBag.CustomerType == 6 ? "selected" : "")>高校</option>
+                        <option value="7" @(ViewBag.CustomerType == 7 ? "selected" : "")>教委</option>
+                        <option value="8" @(ViewBag.CustomerType == 8 ? "selected" : "")>中职</option>
+                        <option value="9" @(ViewBag.CustomerType == 9 ? "selected" : "")>中学</option>
+                        <option value="10" @(ViewBag.CustomerType == 10 ? "selected" : "")>小学</option>
+                        <option value="11" @(ViewBag.CustomerType == 11 ? "selected" : "")>特教</option>
+                        <option value="12" @(ViewBag.CustomerType == 12 ? "selected" : "")>监狱</option>
+                        <option value="13" @(ViewBag.CustomerType == 13 ? "selected" : "")>戒毒所</option>
+                        <option value="14" @(ViewBag.CustomerType == 14 ? "selected" : "")>公检法</option>
+                        <option value="15" @(ViewBag.CustomerType == 15 ? "selected" : "")>武警部队</option>
+                        <option value="16" @(ViewBag.CustomerType == 16 ? "selected" : "")>医院</option>
+                        <option value="17" @(ViewBag.CustomerType == 17 ? "selected" : "")>其他客户</option>
+                    </select>
+                </div>
+            </div>
+            <div class=" layui-col-md4 query-from-item">
+                <label class="layui-form-label">关系等级</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="Relationship">
+                        <option value=""></option>
+                        <option value="1" @(ViewBag.Relationship == 1 ? "selected" : "" )>密切</option>
+                        <option value="2" @(ViewBag.Relationship == 2 ? "selected" : "" )>较好</option>
+                        <option value="3" @(ViewBag.Relationship == 3 ? "selected" : "" )>一般</option>
+                        <option value="4" @(ViewBag.Relationship == 4 ? "selected" : "" )>较差</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">阶段</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="Phase">
+                        <option value=""></option>
+                        <option value="1" @(ViewBag.Phase == 1 ? "selected" : "" )>售前跟踪</option>
+                        <option value="2" @(ViewBag.Phase == 2 ? "selected" : "" )>需求确定</option>
+                        <option value="3" @(ViewBag.Phase == 3 ? "selected" : "" )>售中跟单</option>
+                        <option value="4" @(ViewBag.Phase == 4 ? "selected" : "" )>签约洽谈</option>
+                        <option value="5" @(ViewBag.Phase == 5 ? "selected" : "" )>成交售后</option>
+                        <option value="6" @(ViewBag.Phase == 6 ? "selected" : "" )>跟单失败</option>
+                        <option value="7" @(ViewBag.Phase == 7 ? "selected" : "" )>暂且搁置</option>
+                        <option value="8" @(ViewBag.Phase == 8 ? "selected" : "" )>其他阶段</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">价值评估</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="ValueGrade">
+                        <option value=""></option>
+                        <option value="1" @(ViewBag.ValueGrade == 1 ? "selected" : "" )>高</option>
+                        <option value="2" @(ViewBag.ValueGrade == 2 ? "selected" : "" )>中</option>
+                        <option value="3" @(ViewBag.ValueGrade == 3 ? "selected" : "" )>低</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">客户来源</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="Source">
+                        <option value=""></option>
+                        <option value="1" @(ViewBag.Source == 1 ? "selected" : "" )>客户来电</option>
+                        <option value="2" @(ViewBag.Source == 2 ? "selected" : "" )>主动挖掘</option>
+                        <option value="3" @(ViewBag.Source == 3 ? "selected" : "" )>网站咨询</option>
+                        <option value="4" @(ViewBag.Source == 4 ? "selected" : "" )>客户介绍</option>
+                        <option value="5" @(ViewBag.Source == 5 ? "selected" : "" )>其他来源</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">省份</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="Province" lay-filter="Province" lay-search>
+                        <option value=""></option>
+                        @if (ProvinceList != null)
+                        {
+                            foreach (var p in ProvinceList)
+                            {
+                                <option value="@p.Name" data-id="@p.ID" @(ViewBag.Province == p.Name ? "selected" : "" )>@p.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">城市</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="City" lay-filter="City" lay-search>
+                        <option value="@ViewBag.City">@ViewBag.City</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">热点客户</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" name="IsHeat" lay-skin="switch" @(ViewBag.IsHeat == true ? "checked" : "")>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">热度</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="DegreeOfHeat">
+                        <option value=""></option>
+                        <option value="1" @(ViewBag.DegreeOfHeat == 1 ? "selected" : "")>高热</option>
+                        <option value="2" @(ViewBag.DegreeOfHeat == 2 ? "selected" : "")>中热</option>
+                        <option value="3" @(ViewBag.DegreeOfHeat == 3 ? "selected" : "")>低热</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">最近追踪时间</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="UpdateTime">
+                        <option value=""></option>
+                        <option value="1" @(ViewBag.UpdateTime == 1 ? "selected" : "")>7天未追踪</option>
+                        <option value="2" @(ViewBag.UpdateTime == 2 ? "selected" : "")>15天未追踪</option>
+                        <option value="3" @(ViewBag.UpdateTime == 3 ? "selected" : "")>30天未追踪</option>
+                        <option value="4" @(ViewBag.UpdateTime == 4 ? "selected" : "")>60天未追踪</option>
+                        <option value="5" @(ViewBag.UpdateTime == 5 ? "selected" : "")>90天未追踪</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <label class="layui-form-label">所属用户</label>
+                <div class="layui-input-inline">
+                    <select class="layui-form-select" name="UserID">
+                        <option value=""></option>
+                        @if (userlist != null && userlist.Count > 0)
+                        {
+                            foreach (var user in userlist)
+                            {
+                                <option value="@user.ID" @(ViewBag.userid == user.ID ? "selected" : "")>@user.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4 query-from-item">
+                <div class="layui-input-block">
+                    <input type="hidden" value="1" name="page" />
+                    <button class="layui-btn" lay-submit lay-filter="*">查询</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="layui-row" id="content_table">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>客户名称</th>
+                    <th>种类</th>
+                    <th>联系人</th>
+                    <th>客户来源</th>
+                    <th>阶段</th>
+                    <th>是否是热点客户</th>
+                    <th>热点分类</th>
+                    <th>最后跟踪时间</th>
+                    <th>备注</th>
+                    <th>所属用户</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var ec in Model)
+                    {
+                        string username = string.Empty;
+
+                        if (ec.UserID>0 && userlist != null && userlist.Count>0)
+                        {
+                            var user = userlist.FirstOrDefault(x=>x.ID==ec.UserID);
+                            if (user!=null)
+                            {
+                                username = user.Name;
+                             }
+                        }
+                        <tr>
+                            <td><a href="/EnterCustom/EnterCustomInfo?id=@(ec.ID)">@ec.EnterName</a></td>
+                            <td>@ec.CustomerType.TryToStr()</td>
+                            <td>
+                                @if (eclist!=null && eclist.Count>0)
+                                {
+                                    var ecc = eclist.FindAll(x => x.EnterCustID == ec.ID);
+                                    if (ecc!=null)
+                                    {
+                                        foreach (var enterCustContactse in ecc)
+                                        {
+                                            <p>@(enterCustContactse.Name):@(enterCustContactse.Telephone)|@(enterCustContactse.Landline)|@(enterCustContactse.Email)</p>
+                                            <hr/>
+                                        }
+                                    }
+                                }
+                            </td>
+                            <td>@ec.Source.TryToStr()</td>
+                            <td><a href="/EnterCustom/EnterCustPhaseLogList?id=@(ec.ID)">@ec.Phase.TryToStr()</a></td>
+                            <td>@(ec.IsHeat ? "是" : "否")</td>
+                            <td>@ec.HeatTYPE.TryToStr()</td>
+                            <td>@ec.UpdateTime.ToString("yyyy-MM-dd hh:mm:ss")</td>
+                            <td>@ec.Rem</td>
+                            <td>@username</td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <a href="javascript:;" class="layui-btn layui-btn-small" onclick="updatephase('@(ec.ID)')">更新阶段</a>
+                                    <a href="javascript:;" onclick="showcontroller('@(ec.ID)')" class="layui-btn layui-btn-small">查看联系人</a>
+                                    <a href="/EnterCustom/AddEnterCustContacts?id=0&EnterCustID=@(ec.ID)" class="layui-btn layui-btn-small">添加联系人</a>
+                                    @if (ec.UserID > 0)
+                                    {
+                                        <a href="javascript:;" class="layui-btn layui-btn-small" onclick="entercallback('@(ec.ID)')">放入客户池</a>
+                                    }
+                                    @if (usrrolejur != null && usrrolejur.IsEdit)
+                                    {
+                                        <a href="/EnterCustom/AddEnterCustom?id=@(ec.ID)" class="layui-btn layui-btn-small">编辑</a>
+                                    }
+                                    @if (usrrolejur != null && usrrolejur.IsDelete)
+                                    {
+                                        <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(ec.ID)')">删除</a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer, form
+        layui.use(['form', 'element', 'layer', 'laypage'], function () {
+            form = layui.form
+            layer = layui.layer
+            var laypage = layui.laypage
+
+            form.on('submit(*)', function (data) {
+                $("input[name='page']").val(1)
+                $.post('/EnterCustom/AllEnterList', data.field, function (res) {
+                })
+                //return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+            form.on('select(Province)', function (data) {
+                citylist();
+            });
+            //分页
+            laypage.render({
+                elem: 'page' //分页容器的id
+                , count: @(ViewBag.count) //总页数
+                ,limit:20
+                , skin: '#1E9FFF' //自定义选中色值
+                //,skip: true //开启跳页
+                ,curr: @(ViewBag.pageIndex) //获取起始页
+                , jump: function (obj, first) {
+                    console.log(obj)
+                    if (!first) {
+                        $("input[name='page']").val(obj.curr)
+                        $("#queryform").submit();
+                    }
+                }
+                , hash: 'fenye' //自定义hash值
+            });
+        })
+        //$(function () {
+        //    $.post('/EnterCustom/EnterCustomlist', { page:1 }, function (res) {
+        //        $("#content_table").html(res)
+        //    })
+        //})
+
+        entercallback = function (id) {
+            layer.confirm('是否放入客户池?', { icon: 3, title: '提示' }, function (index) {
+                $.get('/EnterCustom/EnterCallback?id=' + id, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('成功', { icon: 6 });
+                        window.location = '/EnterCustom/Index'
+                    } else {
+                        layer.msg('失败', { icon: 5 });
+                    }
+                });
+                layer.close(index);
+            });
+        }
+        del = function (id) {
+            layer.confirm('是否删除？', { icon: 3, title: '删除提示' }, function (index) {
+                $.get('/EnterCustom/DelEnter?id=' + id, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('成功', { icon: 6 });
+                        window.location = '/EnterCustom/Index'
+                    } else {
+                        layer.msg('失败', { icon: 5 });
+                    }
+                })
+                layer.close(index);
+            });
+        }
+        var showcontroller = function (id) {
+            layer.open({
+                type: 2,
+                title: '联系人列表',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['1200px', '50%'],
+                content: '/EnterCustom/EnterCustContactsList?EnterCustID=' + id
+            });
+        }
+
+        citylist = function () {
+            var pid = $("select[name='Province']").find('option:selected').attr('data-id')
+            $("select[name='City'] option").each(function() {
+                if ($(this).val() != '') {
+                    $(this).remove();
+                }
+            });
+            if (pid == undefined) {
+                form.render('select');
+                return;
+             }
+            $.get('/EnterCustom/GetCityList?id=' + pid,
+                function(result) {
+                    if (result.code == 1) {
+
+                        for (var i = 0; i < result.citylist.length; i++) {
+                            $("select[name='City']").append("<option value='" +
+                                result.citylist[i].name +
+                                "'>" +
+                                result.citylist[i].name +
+                                "</option>")
+                        }
+                        form.render('select');
+                    }
+                });
+        }
+
+        updatephase = function(id){
+            layer.open({
+                type: 2,
+                title: '更新客户所处的阶段',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['1200px', '70%'],
+                content: '/EnterCustom/AddEnterCustPhaseLog?id=' + id
+            });
+        }
+
+        addplan = function (id) {
+            layer.open({
+                type: 2,
+                title: '添加工作计划',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['400px', '40%'],
+                content: '/EnterCustom/AddWorkPlan?EnterCustID=' + id
+            });
+        }
+    </script>
+}
+

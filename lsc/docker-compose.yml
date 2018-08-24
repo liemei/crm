@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  lsc.crm:
+    image: lsc.crm
+    build:
+      context: ./lsc.crm
+      dockerfile: Dockerfile

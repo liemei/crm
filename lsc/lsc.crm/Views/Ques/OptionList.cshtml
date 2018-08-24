@@ -1,0 +1,59 @@
+﻿@using bnuxq.Model
+@model IEnumerable<bnuxq.Model.Option>
+
+@{
+    ViewData["Title"] = "OptionList";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+<table class="layui-table">
+    <thead>
+    <tr>
+        <th>选项索引</th>
+        <th>内容</th>
+        <th>是否答案</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model!=null)
+    {
+        foreach (Option option in Model)
+        {
+            <tr>
+                <td>@(option.ItemIndex)</td>
+                <td>@(option.Content)</td>
+                <td>@(option.IsOk?"是":"否")</td>
+                <td><a href="javascript:;" class="layui-btn-danger" onclick="del('@(option.Id)','@(option.Content)')">删除</a></td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        var layer
+        layui.use(['element', 'layer', 'table'],
+            function() {
+                layer = layui.layer;
+                var table = layui.table;
+            });
+
+
+        del = function(id,name) {
+            layer.confirm('是否删除' + name+'？',
+                { icon: 3, title: '删除提示' },
+                function(index) {
+                    $.get('/Ques/DelOption?id=' + id,
+                        function(res) {
+                            if (res.code === 1) {
+                                layer.msg('成功', { icon: 6 });
+                                window.location.reload();
+                            } else {
+                                layer.msg('失败', { icon: 5 });
+                            }
+                        })
+                    layer.close(index);
+                });
+        }
+    </script>
+}

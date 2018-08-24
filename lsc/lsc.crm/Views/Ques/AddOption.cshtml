@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "添加选项";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+}
+
+<form class="layui-form" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选项索引</label>
+        <div class="layui-input-inline">
+            <select class="layui-form-select" name="ItemIndex" required lay-verify="required">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选项内容</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="Content" required lay-verify="required" placeholder="请填入选项的内容" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">是否是答案</label>
+        <div class="layui-input-inline">
+            <input type="checkbox" name="IsOk" lay-skin="switch">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <input type="hidden" name="QuestionsId" value="@(ViewBag.questionId)" />
+            <button class="layui-btn" lay-submit lay-filter="logform">提交并继续</button>
+            <a href="/Ques/AddQuestion" class="layui-btn layui-btn-primary">添加题目</a>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script type="text/javascript">
+        var layer
+        layui.use(['layer', 'form'], function () {
+            layer = layui.layer
+            var form = layui.form;
+            form.on('submit(logform)', function (data) {
+                $.post("/Ques/SaveOption", data.field, function (res) {
+                    if (res.code === 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        window.location.reload();
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+                return false;
+            });
+        })
+    </script>
+}
+

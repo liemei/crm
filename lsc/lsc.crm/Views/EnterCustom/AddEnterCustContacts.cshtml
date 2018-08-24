@@ -1,0 +1,248 @@
+﻿@using bnuxq.Common
+@model bnuxq.Model.EnterCustContacts
+
+@{
+    ViewData["Title"] = "客户联系人";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+    int type = ViewBag.type;
+    if (type!=0)
+    {
+        Layout = "~/Pages/_Layout.cshtml"; 
+    }
+    //if (Model!=null)
+    //{
+    //    Layout = "~/Pages/_LayoutNone.cshtml";
+    // }
+}
+<blockquote class="layui-elem-quote">
+    添加客户联系人信息
+</blockquote>
+<div class="manage-form-container">
+    <form class="layui-form" method="post" id="addform" action="/EnterCustom/SaveEnterCustContacts">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" value="@(Model!=null ? Model.Name:"")" name="Name"  placeholder="请输入名称" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="1" title="男"  @(Model!=null && Model.Sex == bnuxq.Model.Enume.SexEnum.Man?"checked":"")>
+                <input type="radio" name="sex" value="2" title="女" @(Model!=null && Model.Sex == bnuxq.Model.Enume.SexEnum.Woman?"checked":"")>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">负责业务</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" value="@(Model!=null ? Model.Business:"")" name="Business" placeholder="请输入负责业务" autocomplete="off"  />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" value="@(Model!=null ? Model.Department : "")" name="Department" placeholder="请输入联系人所在部门" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">职务</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" value="@(Model!=null ? Model.Duties:"")" name="Duties" placeholder="请输入联系人职务" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机号</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" onchange="telonchanged()"  @(Model!=null&& !Model.Telephone.IsNull() ? "readonly" : "") value="@(Model!=null ? Model.Telephone:"")" name="Telephone" id="Telephone" placeholder="请输入手机号" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">固定电话</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" onchange="phonechanged()" @(Model!=null&& !Model.Landline.IsNull() ? "readonly" : "") value="@(Model!=null ? Model.Landline:"")" name="Landline" placeholder="请输入手机号" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="email" class="layui-input layui-form-text" onchange="emailchanged()" value="@(Model!=null ? Model.Email:"")" name="Email" id="Email" placeholder="请输入邮箱" autocomplete="off"  />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">QQ</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" onchange="qqchanged()" value="@(Model!=null ? Model.QQ:"")"  name="QQ" placeholder="请输入QQ号" autocomplete="off"  />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">微信号</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" onchange="wechartchanged()" value="@(Model!=null ? Model.WeChart:"")" name="WeChart" placeholder="请输入微信号" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">住址</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" value="@(Model!=null ? Model.Address:"")" name="Address" placeholder="请输入住址" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <textarea name="Rem" class="layui-form-text layui-input" rows="4">@(Model!=null ? Model.Rem:"")</textarea>
+            </div>
+        </div>
+        <div class="layui-form-label">
+            <div class="layui-input-block"><button class="layui-btn" lay-submit lay-filter="*">提交</button></div>
+            <input type="hidden" name="ID" value="@(Model!=null ? Model.ID.ToString() :"")" />
+            <input type="hidden" name="EnterCustID" value="@(Model!=null ? Model.EnterCustID.ToString():ViewBag.EnterCustID)" />
+            <input type="hidden" name="mobile" id="mobile" value="@(Model!=null ? Model.Telephone+Model.Landline:"")" />
+            <input type="hidden" name="emails" id="emails" value="@(Model!=null ? Model.QQ+Model.Email+Model.WeChart:"")" />
+            <input type="hidden" name="t" value="@(ViewBag.type)" />
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="~/layui/jquery.validate.js"></script>
+    <script src="~/layui/jquery.form.js"></script>
+    <script type="text/javascript">
+        var form, layer
+        layui.use(['form', 'element', 'layer'],
+            function() {
+                form = layui.form
+                layer = layui.layer
+            })
+        jQuery.validator.addMethod("isPhone",
+            function(value, element) {
+                var length = value.length;
+                var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+                return this.optional(element) || (length == 11 && mobile.test(value));
+            },
+            "请填写正确的手机号码");
+
+        jQuery.validator.addMethod("isTel",
+            function(value, element) {
+                var length = value.length;
+                var phone = /^\d{3,4}-\d{7,8}$/;
+                return this.optional(element) || (phone.test(value));
+            },
+            "请填写正确的固定电话");
+
+        jQuery.validator.addMethod("isQQ",
+            function(value, element) {
+                var length = value.length;
+                var qq = /^[1-9][0-9]{4,9}$/;
+                return this.optional(element) || (qq.test(value));
+            },
+            "请填写正确的QQ号");
+        $('#addform').validate({
+            ignore: "",
+            rules: {
+                Name: {
+                    required: true,
+                    maxlength: 64
+                },
+                sex: {
+                    required: true
+                },
+                Telephone: {
+                    isPhone: true
+                },
+                Landline: {
+                    isTel: true
+                },
+                mobile: {
+                    required: true
+                },
+                Email: {
+                    email: true
+                },
+                QQ: {
+                    isQQ: true
+                },
+                emails: {
+                    required: true
+                }
+            },
+            messages: {
+                Name: {
+                    required: "请输入联系人名称",
+                    maxlength: "联系人名称最多64个字"
+                },
+                sex: {
+                    required: "请选择性别"
+                },
+                Telephone: {
+                    isPhone: "请输入正确格式的手机号"
+                },
+                Landline: {
+                    Landline: "请输入正确格式的固定电话号"
+                },
+                mobile: {
+                    required: "手机号和固话号至少填一个"
+                },
+                Email: {
+                    email: "请输入正确格式的邮箱"
+                },
+                QQ: {
+                    isQQ: "请输入正确的QQ号"
+                },
+                emails: {
+                    required: "邮箱、QQ、微信号至少填写一个"
+                }
+            },
+            errorPlacement: function(error, element) {
+                console.log(element)
+                if (element.attr("name") == "mobile") {
+                    error.insertAfter("#Telephone");
+                } else if (element.attr("name") == "emails") {
+                    error.insertAfter("#Email");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                //layer.load(0, { shade: false })
+                $(form).ajaxSubmit(function(res) {
+                    if (res.code === 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        var t = Number($("input[name='t']").val());
+                        if (t === 0) {
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                        } else {
+                            window.location = '/EnterCustom/AddEnterCustPhaseLog?types=1&id=@(Model!=null ? Model.EnterCustID.ToString():ViewBag.EnterCustID)';
+                        }
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                });
+            }
+        });
+        var telonchanged = function() {
+            console.log($("input[name='Telephone']").val());
+            $("#mobile").val($("input[name='Telephone']").val() + $("input[name='Landline']").val());
+        }
+        var phonechanged = function() {
+            $("#mobile").val($("input[name='Telephone']").val() + $("input[name='Landline']").val());
+        }
+        var emailchanged = function() {
+            var values = $("input[name='Email']").val() +
+                $("input[name='QQ']").val() +
+                $("input[name='WeChart']").val();
+            $("#emails").val(values);
+        }
+        var qqchanged = function() {
+            var values = $("input[name='Email']").val() +
+                $("input[name='QQ']").val() +
+                $("input[name='WeChart']").val();
+            $("#emails").val(values);
+        }
+        var wechartchanged = function() {
+            var values = $("input[name='Email']").val() +
+                $("input[name='QQ']").val() +
+                $("input[name='WeChart']").val();
+            $("#emails").val(values);
+        }
+    </script>
+}

@@ -1,0 +1,281 @@
+﻿@using bnuxq.Model
+@using bnuxq.Model.Enume
+@model bnuxq.Model.EnterCustomer
+
+@{
+    ViewData["Title"] = "客户信息";
+    int t = ViewBag.t;
+    if (t==0)
+    {
+        Layout = "~/Pages/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Pages/_LayoutNone.cshtml";
+    }
+
+    List<EnterCustContacts> conlist = ViewBag.conlist;
+    List<EnterCustPhaseLog> loglist = ViewBag.loglist;
+    List<SalesProject> projectList = ViewBag.projectList;
+    Dictionary<int, double> recpayDic = ViewBag.recpayDic;
+}
+<blockquote class="layui-elem-quote">
+    客户信息
+</blockquote>
+<div class="layui-row layui-col-space3">
+    <div class="layui-col-md12">
+        <div class="manage-enter-title">@Model.EnterName<small>【@Model.Abbreviation】</small></div>
+    </div>
+    <div class="layui-col-md3 manage-enter-main">
+        <ul>
+            <li>客户类型：@Model.CustomerType.TryToStr()</li>
+            <li>关系等级：@Model.Relationship.TryToStr()</li>
+            <li>价值评估：@Model.ValueGrade.TryToStr()</li>
+            <li>客户来源：@Model.Source.TryToStr()</li>
+            <li>阶段：@Model.Phase.TryToStr()</li>
+        </ul>
+    </div>
+    <div class="layui-col-md3 manage-enter-main">
+        <ul>
+            <li>是否热点客户：@(Model.IsHeat ? "是":"否")</li>
+            <li>热度：@Model.DegreeOfHeat.TryToStr()</li>
+            <li>热点分类：@Model.HeatTYPE.TryToStr()</li>
+            <li>热点说明：</li>
+            <li>@Model.HeatMsg</li>
+        </ul>
+    </div>
+    <div class="layui-col-md3 manage-enter-main">
+        <ul>
+            <li>省份：@Model.Province</li>
+            <li>城市：@Model.City</li>
+            <li>邮编：@Model.ZipCode</li>
+            <li>地址：@Model.Address</li>
+            <li>备注：@Model.Rem</li>
+        </ul>
+    </div>
+    <div class="layui-col-md3 manage-enter-main">
+        <ul>
+            <li>电话：@Model.Telephone</li>
+            <li>座机：@Model.Landline</li>
+            <li>传真：@Model.FaxNumber</li>
+            <li>邮箱：@Model.Email</li>
+            <li>网址：@Model.WebSit</li>
+        </ul>
+    </div>
+    <div class="layui-col-md6 manage-enter-main">
+        <div class="content">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>公司简介</legend>
+                <p>@Model.CustAbstract</p>
+            </fieldset>
+        </div>
+    </div>
+    <div class="layui-col-md6 manage-enter-main">
+        <div class="content">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>开票资料</legend>
+                <p>@Model.InvoiceMsg</p>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<blockquote class="layui-elem-quote">
+    联系人信息
+    <a class="layui-btn layui-btn-normal" href="javascipt:;" onclick="addecc('0')" >添加联系人</a>
+    <a class="layui-btn layui-btn-normal" href="javascript:;" onclick="addplan()">添加工作计划</a>
+</blockquote>
+<div class="layui-row">
+    <table class="layui-table">
+        <thead >
+            <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>部门</th>
+                <th>职务</th>
+                <th>负责业务</th>
+                <th>手机</th>
+                <th>座机</th>
+                <th>邮箱</th>
+                <th>QQ</th>
+                <th>微信</th>
+                <th>住址</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody class="layui-table-body">
+            @if (conlist != null && conlist.Count > 0)
+            {
+                foreach (var con in conlist)
+                {
+                    <tr>
+                        <td>@con.Name</td>
+                        <td>@con.Sex.TryToStr()</td>
+                        <td>@con.Department</td>
+                        <td>@con.Duties</td>
+                        <td>@con.Business</td>
+                        <td>@con.Telephone</td>
+                        <td>@con.Landline</td>
+                        <td>@con.Email</td>
+                        <td>@con.QQ</td>
+                        <td>@con.WeChart</td>
+                        <td>@con.Address</td>
+                        <td>@con.Rem</td>
+                        <td><a href="javascript:;" onclick="addecc('@(con.ID)')">编辑</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<blockquote class="layui-elem-quote">
+    客户联系时间线
+    <a class="layui-btn layui-btn-normal" href="javascript:;" onclick="updatephase()">添加联系记录</a>
+</blockquote>
+
+<div class="layui-row">
+    <ul class="layui-timeline">
+        @if (Model != null)
+        {
+            foreach (var log in loglist)
+            {
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">@log.Phase.TryToStr()</h3>
+                        @Html.Raw(log.Rem)
+                        <br />
+                        <span style="margin-left: 100px;">-----<small>@log.UserName (@log.CreateTime.ToString("yyyy-MM-dd"))</small></span>
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title">过去</h3>
+                    <p>
+                        暂时没有动态<i class="layui-icon"></i>
+                    </p>
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>
+
+<blockquote class="layui-elem-quote">
+    销售项目
+    <a class="layui-btn layui-btn-normal" href="/EnterCustom/AddSalesProject?EnterCustomerID=@(Model.ID)">添加销售项目</a>
+</blockquote>
+<div class="layui-row">
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th>项目标题</th>
+                <th>项目概要</th>
+                <th>项目状态</th>
+                <th>项目类型</th>
+                <th>立项时间</th>
+                <th>项目金额</th>
+                <th>已回款</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (projectList != null && projectList.Count > 0)
+            {
+                foreach (var info in projectList)
+                {
+                    double amt = 0;
+                    if (recpayDic != null && recpayDic.ContainsKey(info.ID))
+                    {
+                        amt = recpayDic[info.ID];
+                    }
+                    <tr>
+                        <td>@info.Title</td>
+                        <td>@info.ProjectAbstract</td>
+                        <td><a href="/EnterCustom/GetSalesProjectStateLog?SalesProjectID=@(info.ID)">@info.ProjectState.TryToStr()</a></td>
+                        <td>@info.ProjectType.TryToStr()</td>
+                        <td>@info.ProjectTime.ToString("yyyy-MM-dd")</td>
+                        <td>@info.ProjectAmt</td>
+                        <td>@amt</td>
+                        <td>
+                            <div class="layui-btn-group">
+                                <a href="javascript:;" onclick="updatestate('@info.ID')" class="layui-btn layui-btn-small">修改项目状态</a>
+                                <a href="javascript:;" class="layui-btn layui-btn-small" onclick="addReceoverdPay('@info.ID')">添加回款记录</a>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var layer
+        layui.use(['element', 'table', 'layer'], function () {
+            layer = layui.layer
+        })
+        // 添加联系记录
+        updatephase = function () {
+            layer.open({
+                type: 2,
+                title: '更新客户所处的阶段',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['1200px', '70%'],
+                content: '/EnterCustom/AddEnterCustPhaseLog?id=@(Model.ID)'
+            });
+        }
+
+
+        updatestate = function (id) {
+            layer.open({
+                type: 2,
+                title: '更新销售项目状态',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['1200px', '70%'],
+                content: '/EnterCustom/AddSalesProjectStateLog?SalesProjectID=' + id
+            });
+        }
+        addReceoverdPay = function (id) {
+            layer.open({
+                type: 2,
+                title: '添加回款记录',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['400px', '40%'],
+                content: '/EnterCustom/AddReceovedPayLog?SalesProjectID=' + id
+            });
+        }
+
+        addplan = function () {
+            layer.open({
+                type: 2,
+                title: '添加工作计划',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['400px', '40%'],
+                content: '/EnterCustom/AddWorkPlan?EnterCustID=@(Model.ID)'
+            });
+        }
+
+        addecc = function (id) {
+            layer.open({
+                type: 2,
+                title: '编辑联系人',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['600px', '80%'],
+                content: '/EnterCustom/AddEnterCustContacts?id=' + id +'&EnterCustID=@(Model.ID)'
+            });
+        }
+    </script>
+}

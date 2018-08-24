@@ -1,0 +1,17 @@
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\bin\Debug\netcoreapp2.0\bnuxq.Model.deps.json
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\bin\Debug\netcoreapp2.0\bnuxq.Model.dll
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\bin\Debug\netcoreapp2.0\bnuxq.Model.pdb
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.csproj.CoreCompileInputs.cache
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.AssemblyInfoInputs.cache
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.AssemblyInfo.cs
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.dll
+D:\Code\Net\bnuxq\crm\bnuxq\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.pdb
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\bin\Debug\netcoreapp2.0\bnuxq.Model.deps.json
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\bin\Debug\netcoreapp2.0\bnuxq.Model.dll
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\bin\Debug\netcoreapp2.0\bnuxq.Model.pdb
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.csproj.CoreCompileInputs.cache
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.AssemblyInfoInputs.cache
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.AssemblyInfo.cs
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.dll
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.pdb
+D:\Code\Net\bnuxq\crm\bnuxq1\bnuxq.Model\obj\Debug\netcoreapp2.0\bnuxq.Model.csprojResolveAssemblyReference.cache

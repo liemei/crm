@@ -1,0 +1,66 @@
+﻿@using bnuxq.Model.Enume
+@using bnuxq.Model
+@model List<EnterCustPhaseLog>
+@{
+    ViewData["Title"] = "PhoneTotalList";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+    List<EnterCustomer> enlist = ViewBag.enlist;
+}
+
+<table class="layui-table">
+    <thead class="layui-table-header">
+    <tr>
+        <th>客户名称</th>
+        <th>客户阶段</th>
+        <th>联系内容</th>
+        <th>联系时间</th>
+    </tr>
+    </thead>
+    <tbody class="layui-table-body">
+    @if (Model != null)
+    {
+        foreach (var info in Model)
+        {
+            string name = string.Empty;
+            int id = 0;
+            if (enlist!=null)
+            {
+                var en = enlist.FirstOrDefault(x=>x.ID==info.EnterCustomerID);
+                if (en!=null)
+                {
+                    name = en.EnterName;
+                    id = en.ID;
+                }
+            }
+            <tr>
+                <td><a href="javascript:;" onclick="enterinfo('@(id)')">@name</a></td>
+                <td>@info.Phase.TryToStr()</td>
+                <td>@Html.Raw(info.Rem)</td>
+                <td>@info.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+    }
+
+    </tbody>
+</table>
+
+<script>
+    var element, table, layer;
+    layui.use(['element', 'table', 'layer'], function() {
+        element = layui.element;
+        table = layui.table;
+        layer = layui.layer;
+    });
+    var enterinfo = function(id) {
+        layer.open({
+            type: 2,
+            title: '客户信息列表',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1100px', '90%'],
+            content: '/EnterCustom/EnterCustomInfo?id=' + id + "&t=1"
+        });
+    }
+</script>
+
+

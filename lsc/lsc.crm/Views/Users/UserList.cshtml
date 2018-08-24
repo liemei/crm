@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "用户管理";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<blockquote class="layui-elem-quote">
+    用户管理中展示了所有的用户信息，可以进行删除添加等操作
+    <a class="layui-btn layui-btn-normal" href="/Users/AddUser">添加用户</a>
+</blockquote>
+<table class="layui-table" lay-data="{height:600, url:'/Users/UserListData', page:true, id:'idTest'}" lay-filter="demo">
+    <thead>
+        <tr>
+            <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+            <th lay-data="{field:'userName', width:80}">用户名</th>
+            <th lay-data="{field:'name', width:180, sort: true}">姓名</th>
+            <th lay-data="{field:'telPhone', width:180}">电话号</th>
+            <th lay-data="{field:'roleName', width:177}">角色</th>
+            <th lay-data="{field:'createTime', width:177}">创建时间</th>
+            <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#barDemo'}"></th>
+        </tr>
+    </thead>
+</table>
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-group">
+        <a class="layui-btn layui-btn-mini" lay-event="edity">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    </div>
+</script>
+@section Scripts{ 
+    <script type="text/javascript">
+        var layer 
+        layui.use(['laypage', 'layer', 'table', 'element'], function () {
+            layer = layui.layer
+            table = layui.table
+            laypage = layui.laypage
+
+            //监听工具条
+            table.on('tool(demo)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                var data = obj.data //获得当前行数据
+                    , layEvent = obj.event; //获得 lay-event 对应的值
+                if (layEvent === 'del') {
+                    layer.confirm('真的删除么', function (index) {
+                        if (data.name == '系统管理员') {
+                            layer.msg('系统管理员不能删除', { icon: 2});
+                            return
+                         }
+                        $.get('/Users/DelUser?id=' + data.id, function (res) {
+                            if (res.code == 1) {
+                                obj.del(); //删除对应行（tr）的DOM结构
+                                layer.close(index);
+                                layer.msg('删除成功', { icon: 6 });
+                            } else { 
+                                layer.msg('删除失败', { icon: 5 });
+                            }
+                         })
+                        //向服务端发送删除指令
+                    });
+                } else if (layEvent === 'edity') {
+                    window.location = '/Users/AddUser?id=' + data.id;
+                 }
+            });
+        });
+    </script>
+}
+
+

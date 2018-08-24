@@ -1,0 +1,416 @@
+﻿@using bnuxq.Common
+@using bnuxq.Model
+@using bnuxq.Model.Enume
+@model EnterCustomer
+@{
+    ViewData["Title"] = "添加客户";
+    Layout = "~/Pages/_Layout.cshtml";
+    List<DistrictInfo> ProvinceList = ViewBag.ProvinceList;
+}
+
+<blockquote class="layui-elem-quote">
+    添加客户信息
+</blockquote>
+<div class="manage-form-container">
+    <form class="layui-form" method="post" id="addform" action="/EnterCustom/SaveEnterCustom">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户全称</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text"  name="EnterName" id="EnterName" value="@(Model!=null?Model.EnterName:"")"  placeholder="请输入客户名称" autocomplete="off" />
+            </div>
+        </div>
+        @*<div class="layui-form-item">
+            <label class="layui-form-label">客户简称</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" name="Abbreviation" id="Abbreviation" value="@(Model!=null?Model.Abbreviation:"")" placeholder="请输入客户简称" autocomplete="off" />
+            </div>
+        </div>*@
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户类型</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="CustomerType"  lay-search>
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.CustomerType == CustomerTypeEnum.Dealer ? "selected" : "")>代理经销商</option>
+                    @*<option value="2" @(Model != null && Model.CustomerType == CustomerTypeEnum.Ordinary ? "selected" : "")>普通客户</option>
+                    <option value="3" @(Model != null && Model.CustomerType == CustomerTypeEnum.BigCustomer ? "selected" : "")>集团大客户</option>
+                    <option value="4" @(Model != null && Model.CustomerType == CustomerTypeEnum.Cooperation ? "selected" : "")>业务合作商</option>
+                    <option value="5" @(Model != null && Model.CustomerType == CustomerTypeEnum.Same ? "selected" : "")>怀疑同行</option>*@
+                    <option value="6" @(Model != null && Model.CustomerType == CustomerTypeEnum.Colleges ? "selected" : "")>高校</option>
+                    <option value="7" @(Model != null && Model.CustomerType == CustomerTypeEnum.Commission ? "selected" : "")>教委</option>
+                    <option value="8" @(Model != null && Model.CustomerType == CustomerTypeEnum.VocationalSchools ? "selected" : "")>中职</option>
+                    <option value="9" @(Model != null && Model.CustomerType == CustomerTypeEnum.MiddleSchool ? "selected" : "")>中学</option>
+                    <option value="10" @(Model != null && Model.CustomerType == CustomerTypeEnum.PrimarySchool ? "selected" : "")>小学</option>
+                    <option value="11" @(Model != null && Model.CustomerType == CustomerTypeEnum.Special ? "selected" : "")>特教</option>
+                    <option value="12" @(Model != null && Model.CustomerType == CustomerTypeEnum.Prison ? "selected" : "")>监狱</option>
+                    <option value="13" @(Model != null && Model.CustomerType == CustomerTypeEnum.JDS ? "selected" : "")>戒毒所</option>
+                    <option value="14" @(Model != null && Model.CustomerType == CustomerTypeEnum.Judicial ? "selected" : "")>公检法</option>
+                    <option value="15" @(Model != null && Model.CustomerType == CustomerTypeEnum.ArmedPolice ? "selected" : "")>武警部队</option>
+                    <option value="16" @(Model != null && Model.CustomerType == CustomerTypeEnum.Hospital ? "selected" : "")>医院</option>
+                    <option value="17" @(Model != null && Model.CustomerType == CustomerTypeEnum.Other ? "selected" : "")>其他客户</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">关系等级</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="Relationship">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.Relationship == RelationshipEnume.Intimate ? "selected" : "")>密切</option>
+                    <option value="2" @(Model != null && Model.Relationship == RelationshipEnume.Better ? "selected" : "")>较好</option>
+                    <option value="3" @(Model != null && Model.Relationship == RelationshipEnume.Commonly ? "selected" : "")>一般</option>
+                    <option value="4" @(Model != null && Model.Relationship == RelationshipEnume.Poor ? "selected" : "")>较差</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">阶段</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="Phase">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.Phase == PhaseEnume.Pre_sale ? "selected" : "")>售前跟踪</option>
+                    <option value="2" @(Model != null && Model.Phase == PhaseEnume.Demand_Confirmation ? "selected" : "")>需求确定</option>
+                    <option value="3" @(Model != null && Model.Phase == PhaseEnume.In_Sales ? "selected" : "")>售中跟单</option>
+                    <option value="4" @(Model != null && Model.Phase == PhaseEnume.Sign_Contract ? "selected" : "")>签约洽谈</option>
+                    <option value="5" @(Model != null && Model.Phase == PhaseEnume.After_Sale ? "selected" : "")>成交售后</option>
+                    <option value="6" @(Model != null && Model.Phase == PhaseEnume.Invalid ? "selected" : "")>跟单失败</option>
+                    <option value="7" @(Model != null && Model.Phase == PhaseEnume.Shelve ? "selected" : "")>暂且搁置</option>
+                    <option value="8" @(Model != null && Model.Phase == PhaseEnume.Other ? "selected" : "")>其他阶段</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">价值评估</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="ValueGrade">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.ValueGrade == ValueGradeEnume.Senior ? "selected" : "")>高</option>
+                    <option value="2" @(Model != null && Model.ValueGrade == ValueGradeEnume.Intermediate ? "selected" : "")>中</option>
+                    <option value="3" @(Model != null && Model.ValueGrade == ValueGradeEnume.Lower ? "selected" : "")>低</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户来源</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="Source">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.Source == CustSource.CustTelephone ? "selected" : "")>客户来电</option>
+                    <option value="2" @(Model != null && Model.Source == CustSource.Excavate ? "selected" : "")>主动挖掘</option>
+                    <option value="3" @(Model != null && Model.Source == CustSource.WebConsulting ? "selected" : "")>网站咨询</option>
+                    <option value="4" @(Model != null && Model.Source == CustSource.Introduction ? "selected" : "")>客户介绍</option>
+                    <option value="6" @(Model != null && Model.Source == CustSource.Tender ? "selected" : "")>招标</option>
+                    <option value="7" @(Model != null && Model.Source == CustSource.Exhibition ? "selected" : "")>展会</option>
+                    <option value="8" @(Model != null && Model.Source == CustSource.QQqun ? "selected" : "")>QQ&微信群</option>
+                    <option value="5" @(Model != null && Model.Source == CustSource.Other ? "selected" : "")>其他来源</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">省份</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="Province" lay-filter="Province" lay-search>
+                    <option value=""></option>
+                    @if (ProvinceList != null && ProvinceList.Count > 0)
+                    {
+                        foreach (var p in ProvinceList)
+                        {
+                            <option value="@p.Name" data-id="@p.ID"  @(Model!=null && Model.Province==(p.Name)?"selected":"")>@p.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">城市</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="City" lay-filter="City" lay-search>
+                    <option value=""></option>
+                    @if (Model != null)
+                    {
+                        <option value="@Model.City" selected data-id="">@Model.City</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">热点客户</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="IsHeat" lay-skin="switch" @(Model != null && Model.IsHeat ? "checked" : "")>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">热度</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="DegreeOfHeat">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.DegreeOfHeat == DegreeOfHeatEnume.Senior ? "selected" : "")>高热</option>
+                    <option value="2" @(Model != null && Model.DegreeOfHeat == DegreeOfHeatEnume.Intermediate ? "selected" : "")>中热</option>
+                    <option value="3" @(Model != null && Model.DegreeOfHeat == DegreeOfHeatEnume.Lower ? "selected" : "")>低热</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">热点分类</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="HeatTYPE">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.HeatTYPE == HeatTypeEnum.Intentional ? "selected" : "")>有意向客户</option>
+                    <option value="2" @(Model != null && Model.HeatTYPE == HeatTypeEnum.Key_Account ? "selected" : "")>重点客户</option>
+                    <option value="3" @(Model != null && Model.HeatTYPE == HeatTypeEnum.Hopeful ? "selected" : "")>有望签单客户</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">热点说明</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入热点说明" class="layui-textarea" name="HeatMsg">@(Model != null ? Model.HeatMsg:"")</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机号</label>
+            <div class="layui-input-block">
+                <input type="text" placeholder="请输入手机号" onchange="telonchanged()"  @(Model!=null&& !Model.Telephone.IsNull() ? "readonly" : "") class="layui-input layui-form-text" autocomplete="off"  name="Telephone" id="Telephone" value="@(Model != null ? Model.Telephone:"")" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">座机号</label>
+            <div class="layui-input-block">
+                <input type="text" placeholder="请输入手机号" onchange="phonechanged()" @(Model!=null&& !Model.Landline.IsNull() ? "readonly" : "") class="layui-input layui-form-text" autocomplete="off" name="Landline" value="@(Model != null ? Model.Landline:"")" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">传真</label>
+            <div class="layui-input-block">
+                <input type="text" placeholder="请输入传真" class="layui-input layui-form-text" autocomplete="off" name="FaxNumber" @(Model != null ? Model.FaxNumber : "") />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮编</label>
+            <div class="layui-input-block">
+                <input type="text" placeholder="请输入邮编" class="layui-input layui-form-text" autocomplete="off" name="ZipCode" @(Model != null ? Model.ZipCode : "") />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="text" placeholder="请输入邮箱" class="layui-input layui-form-text" autocomplete="off" ay-verify="email" name="Email" @(Model != null ? Model.Email : "") />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">网址</label>
+            <div class="layui-input-block">
+                <input type="text" placeholder="请输入网址" class="layui-input layui-form-text" autocomplete="off" ay-verify="url" name="WebSit" @(Model != null ? Model.WebSit : "") />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-block">
+                <input type="text" placeholder="请输入地址" class="layui-input layui-form-text" autocomplete="off" name="Address" @(Model != null ? Model.Address : "") />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开票资料</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入开票资料" class="layui-textarea" name="InvoiceMsg">@(Model != null ? Model.InvoiceMsg:"")</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户简介</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入客户简介" class="layui-textarea" name="CustAbstract">@(Model != null ? Model.CustAbstract:"")</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入备注信息" class="layui-textarea" name="Rem">@(Model != null ? Model.Rem:"")</textarea>
+            </div>
+        </div>
+        <input type="hidden" name="ID" value="@(Model!=null ? Model.ID:0)" id="ID" />
+        <input type="hidden" name="mobile" id="mobile" value="@(Model!=null ? Model.Telephone + Model.Landline:"")" />
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{ 
+    <script src="~/layui/jquery.validate.js"></script>
+    <script src="~/layui/jquery.form.js"></script>
+    <script type="text/javascript">
+        var form, layer
+        layui.use(['form', 'element', 'layer'], function () {
+            layer = layui.layer
+            form = layui.form
+            form.on('select(Province)', function (data) {
+                citylist();
+            });
+        })
+        jQuery.validator.addMethod("isPhone", function (value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请填写正确的手机号码");//可以自定义默认提示信息
+
+        jQuery.validator.addMethod("isTel", function (value, element) {
+            var length = value.length;
+            var phone = /^\d{3,4}-\d{7,8}$/ ;
+            return this.optional(element) || (phone.test(value));
+        }, "请填写正确的固定电话");//可以自定义默认提示信息
+        $('#addform').validate({
+            ignore:"",
+            rules: {
+                EnterName: {
+                    required: true,
+                    maxlength:64,
+                    remote: {
+                        url: "/EnterCustom/ExistsEnterName",
+                        type: 'get',
+                        data: {
+                            id: function () { 
+                                return $("#ID").val()
+                            },
+                            EnterName: function () {
+                                return $("#EnterName").val()
+                            }
+                        },
+                        dataFilter: function (data, type) {
+                            var jdata = JSON.parse(data)
+                            if (jdata.result) {
+                                return false
+                            } else {
+                                return true
+                            }
+                        }
+                    }
+                },
+                CustomerType: {
+                    required: true
+                },
+                Telephone: {
+                    isPhone: true
+                },
+                Landline: {
+                    isTel: true
+                },
+                mobile: {
+                    required: true
+                },
+                Source: {
+                    required: true
+                },
+                Province: {
+                    required: true
+                },
+                City: {
+                    required: true
+                },
+                Email: {
+                    email: true
+                },
+                WebSit: {
+                    url: true
+                },
+                Address: {
+                    maxlength: 126
+                },
+                Phase: {
+                    required: true
+                }
+            },
+            messages: {
+                EnterName: {
+                    required: "请输入客户名称",
+                    maxlength:"客户名称最多64个字",
+                    remote:"客户名称已存在"
+                },
+                CustomerType: {
+                    required: "请选择客户类型"
+                },
+                Telephone: {
+                    isPhone:"请输入正确格式的手机号"
+                },
+                Landline: {
+                    Landline:"请输入正确格式的固定电话号"
+                },
+                mobile: {
+                    required:"手机号和固话号至少填一个"
+                },
+                Source: {
+                    required: "请选择客户来源"
+                },
+                Province: {
+                    required: "请选择省份"
+                },
+                City: {
+                    required: "请选择城市"
+                },
+                Email: {
+                    email: "请输入正确格式的邮箱"
+                },
+                WebSit: {
+                    url: "请输入正确格式的网址"
+                },
+                Address: {
+                    maxlength: "地址最多126个字"
+                },
+                Phase: {
+                    required: "请选择现在所处的阶段"
+                }
+            },
+            errorPlacement: function (error, element) {
+                console.log(element)
+                if (element.attr("name") == "mobile") {
+                    error.insertAfter("#Telephone");
+                } else { 
+                    error.insertAfter(element);
+                }
+                //if (element.is(":radio"))
+                //    error.appendTo(element.parent().next().next());
+                //else if (element.is(":checkbox"))
+                //    error.appendTo(element.next());
+                //else
+                //    error.appendTo(element.parent().next());  
+                
+            },
+            submitHandler: function (form) {
+                layer.load(0, { shade: false })
+                $(form).ajaxSubmit(function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        //window.location = '/EnterCustom/Index'
+                        window.location = '/EnterCustom/AddEnterCustContacts?type=1&id=0&EnterCustID=' + res.id
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+            }
+        })
+        citylist = function () {
+            var pid = $("select[name='Province']").find('option:selected').attr('data-id')
+            $.get('/EnterCustom/GetCityList?id=' + pid, function (result) {
+                if (result.code == 1) {
+                    $("select[name='City'] option").each(function () {
+                        if ($(this).val() != '') {
+                            $(this).remove();
+                        }
+                    })
+                    for (var i = 0; i < result.citylist.length; i++) {
+                        $("select[name='City']").append("<option value='" + result.citylist[i].name + "'>" + result.citylist[i].name + "</option>")
+                    }
+                    form.render('select');
+                }
+            })
+        }
+        var telonchanged = function () {
+            console.log($("input[name='Telephone']").val());
+            $("#mobile").val($("input[name='Telephone']").val() + $("input[name='Landline']").val());
+        }
+        var phonechanged = function () { 
+            $("#mobile").val($("input[name='Landline']").val() + $("input[name='Telephone']").val());
+        }
+    </script>
+}
+

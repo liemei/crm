@@ -1,0 +1,3 @@
+12:55:34.9895300 >ERROR> UserDal.GetByID > An exception occurred while reading a database value for property 'UserInfo.RoleID'. The expected type was 'System.Int32' but the actual value was null.,Microsoft.EntityFrameworkCore
+12:56:20.6759827 >ERROR> UserDal.GetByID > An exception occurred while reading a database value for property 'UserInfo.RoleID'. The expected type was 'System.Int32' but the actual value was null.,Microsoft.EntityFrameworkCore
+12:56:59.9156832 >ERROR> UserDal.GetByID > An exception occurred while reading a database value for property 'UserInfo.RoleID'. The expected type was 'System.Int32' but the actual value was null.,Microsoft.EntityFrameworkCore

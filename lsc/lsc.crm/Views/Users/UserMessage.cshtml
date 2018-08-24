@@ -1,0 +1,15 @@
+﻿@using bnuxq.Model
+@model UserInfo
+@{
+    ViewData["Title"] = "用户信息";
+    Layout = "~/Pages/_LayoutNone.cshtml";
+    UserRole userRole = ViewBag.userRole;
+}
+<div style="text-align:center">
+    <p>用户名：@Model.UserName</p>
+    <p>姓名： @Model.Name</p>
+    <p>手机号： @Model.TelPhone</p>
+    <p>角色： @userRole.RoleName</p>
+    <p>注册时间： @Model.CreateTime.ToString("yyyy-MM-dd")</p>
+</div>
+

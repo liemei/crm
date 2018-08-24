@@ -1,0 +1,84 @@
+﻿@model bnuxq.Model.EmailResources
+
+@{
+    ViewData["Title"] = "添加邮件资源";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>添加邮件资源管理</legend>
+</fieldset>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div class="layui-col-md6">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="Email" placeholder="请输入邮箱" required lay-verify="required" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="UserName" placeholder="请输入邮箱用户名" required lay-verify="required" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="Password" placeholder="请输入密码" required lay-verify="required" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">端口号</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="Port" placeholder="请输入端口号" required lay-verify="required" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮件服务IP</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="SenderServerIp" placeholder="请输入端口号" required lay-verify="required" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var layer;
+        layui.use(['form', 'layer','element'], function () {
+            var form = layui.form;
+            var element = layui.element;
+            layer = layer;
+
+            form.on('submit(*)', function (data) {
+
+                $.post('/EmailManage/SaveAsync',
+                    data.field,
+                    function(res) {
+                        if (res.code == 1) {
+                            layer.msg('保存成功', { icon: 6 });
+                            window.location = '/EmailManage/Index';
+                        } else {
+                            layer.msg('保存失败', { icon: 5 });
+                        }
+                    });
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+       
+    </script>
+}
+
