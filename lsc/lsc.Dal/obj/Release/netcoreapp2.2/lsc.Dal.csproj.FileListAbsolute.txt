@@ -1,0 +1,16 @@
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Dal.deps.json
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Dal.dll
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Dal.pdb
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Common.dll
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Model.dll
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Common.pdb
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Model.pdb
+D:\gitCode\crm\lsc\lsc.Dal\obj\Release\netcoreapp2.2\lsc.Dal.csprojAssemblyReference.cache
+D:\gitCode\crm\lsc\lsc.Dal\obj\Release\netcoreapp2.2\lsc.Dal.csproj.CoreCompileInputs.cache
+D:\gitCode\crm\lsc\lsc.Dal\obj\Release\netcoreapp2.2\lsc.Dal.AssemblyInfoInputs.cache
+D:\gitCode\crm\lsc\lsc.Dal\obj\Release\netcoreapp2.2\lsc.Dal.AssemblyInfo.cs
+D:\gitCode\crm\lsc\lsc.Dal\obj\Release\netcoreapp2.2\lsc.Dal.csproj.CopyComplete
+D:\gitCode\crm\lsc\lsc.Dal\obj\Release\netcoreapp2.2\lsc.Dal.dll
+D:\gitCode\crm\lsc\lsc.Dal\obj\Release\netcoreapp2.2\lsc.Dal.pdb
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Dal.runtimeconfig.json
+D:\gitCode\crm\lsc\lsc.Dal\bin\Release\netcoreapp2.2\lsc.Dal.runtimeconfig.dev.json

@@ -1,0 +1,60 @@
+13:39:54.9450499 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=84&t=1&p=1,
+14:32:20.3268532 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=84&t=1&p=1,
+14:42:46.6529633 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=84&t=1&p=1,
+14:44:16.1228248 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=84&t=1&p=2,
+15:14:41.6140300 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1,
+15:15:31.8099637 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1&t=1&p=1,
+15:18:28.1204382 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1,
+15:18:33.8921543 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1&t=1&p=1,
+16:37:16.5975889 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1,
+16:37:22.6061898 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1&t=1&p=1,
+16:37:23.8093479 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:24.8103028 >INFO> 成功抓取学校: > 首钢幼儿保教中心,
+16:37:25.8135950 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:26.8189441 >INFO> 成功抓取学校: > 首都师范大学幼儿教育中心,
+16:37:27.8213424 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:28.8224949 >INFO> 成功抓取学校: > 顺义南法信镇中心幼儿园,
+16:37:29.8387636 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:30.8402772 >INFO> 成功抓取学校: > 顺义区牛栏山中心幼儿园,
+16:37:31.8411508 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:32.8427487 >INFO> 成功抓取学校: > 顺义区杨镇中心幼儿园,
+16:37:33.8472800 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:34.8508025 >INFO> 成功抓取学校: > 顺义区李遂镇中心幼儿园,
+16:37:35.8515734 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:36.8631036 >INFO> 成功抓取学校: > 顺义区北小营中心幼儿园,
+16:37:37.8650331 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:38.8658830 >INFO> 成功抓取学校: > 顺义区仁和中心幼儿园,
+16:37:39.8678109 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:40.8689260 >INFO> 成功抓取学校: > 通州区玉桥街道幼儿园,
+16:37:41.8702488 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:42.9215511 >INFO> 成功抓取学校: > 西城区福绥境街道横三条幼儿园,
+16:37:43.9320414 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:44.9336630 >INFO> 成功抓取学校: > 科委家委会托儿所,
+16:37:45.9345797 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:46.9451181 >INFO> 成功抓取学校: > 海淀区北安河乡中心幼儿园,
+16:37:47.9458960 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:48.9475534 >INFO> 成功抓取学校: > 朝阳区左家庄街道中心幼儿园,
+16:37:49.9498434 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:50.9561268 >INFO> 成功抓取学校: > 朝阳区十八里店兴华幼儿园,
+16:37:51.9593969 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:37:52.9603079 >INFO> 成功抓取学校: > 望京新城幼儿园,
+16:37:53.9691679 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:46:39.6999241 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1,
+16:46:45.5474854 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1&t=1&p=1,
+16:46:46.5507809 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:46:47.5515144 >INFO> 成功抓取学校: > 首钢幼儿保教中心,
+16:46:48.5533401 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:46:49.5573381 >INFO> 成功抓取学校: > 首都师范大学幼儿教育中心,
+16:46:50.5597652 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:46:51.5607735 >INFO> 成功抓取学校: > 顺义南法信镇中心幼儿园,
+16:46:52.5679002 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:46:53.5729770 >INFO> 成功抓取学校: > 顺义区牛栏山中心幼儿园,
+16:46:54.5740662 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:46:55.5766342 >INFO> 成功抓取学校: > 顺义区杨镇中心幼儿园,
+16:47:03.3663256 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:47:07.3340747 >INFO> 成功抓取学校: > 顺义区李遂镇中心幼儿园,
+16:47:10.5888726 >ERROR> EnterCustomerDal.ExistsEnterNameAsync > Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. 系统找不到指定的文件。,lsc.Dal
+16:49:02.5975843 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1,
+16:49:11.3971523 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1&t=1&p=1,
+16:50:00.4052322 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1,
+16:50:08.5453181 >INFO> HttpUtils.GetAsync > https://www.ruyile.com/xuexiao/?a=1&t=1&p=1,

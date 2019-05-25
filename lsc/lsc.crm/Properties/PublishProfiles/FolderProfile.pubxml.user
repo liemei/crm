@@ -6,7 +6,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\WebSit\crm</_PublishTargetUrl>
-    <EncryptedPassword />
+    <_PublishTargetUrl>D:\gitCode\crm\lsc\lsc.crm\bin\Release\netcoreapp2.2\publish\</_PublishTargetUrl>
   </PropertyGroup>
 </Project>

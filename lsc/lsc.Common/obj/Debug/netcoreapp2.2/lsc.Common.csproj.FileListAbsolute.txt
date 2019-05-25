@@ -1,0 +1,9 @@
+D:\gitCode\crm\lsc\lsc.Common\bin\Debug\netcoreapp2.2\lsc.Common.deps.json
+D:\gitCode\crm\lsc\lsc.Common\bin\Debug\netcoreapp2.2\lsc.Common.dll
+D:\gitCode\crm\lsc\lsc.Common\bin\Debug\netcoreapp2.2\lsc.Common.pdb
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.2\lsc.Common.csproj.CoreCompileInputs.cache
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.2\lsc.Common.AssemblyInfoInputs.cache
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.2\lsc.Common.AssemblyInfo.cs
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.2\lsc.Common.dll
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.2\lsc.Common.pdb
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.2\lsc.Common.csprojAssemblyReference.cache

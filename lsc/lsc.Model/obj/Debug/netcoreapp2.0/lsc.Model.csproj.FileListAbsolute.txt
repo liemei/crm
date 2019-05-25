@@ -25,3 +25,12 @@ D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfoInputs.c
 D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfo.cs
 D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.dll
 D:\Code\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.pdb
+D:\gitCode\crm\lsc\lsc.Model\bin\Debug\netcoreapp2.0\lsc.Model.deps.json
+D:\gitCode\crm\lsc\lsc.Model\bin\Debug\netcoreapp2.0\lsc.Model.dll
+D:\gitCode\crm\lsc\lsc.Model\bin\Debug\netcoreapp2.0\lsc.Model.pdb
+D:\gitCode\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.csprojAssemblyReference.cache
+D:\gitCode\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.csproj.CoreCompileInputs.cache
+D:\gitCode\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfoInputs.cache
+D:\gitCode\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.AssemblyInfo.cs
+D:\gitCode\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.dll
+D:\gitCode\crm\lsc\lsc.Model\obj\Debug\netcoreapp2.0\lsc.Model.pdb

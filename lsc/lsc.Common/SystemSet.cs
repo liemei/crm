@@ -17,7 +17,7 @@ namespace lsc.Common
                     _MysqlConnectionString = configuration.GetConnectionString("MySqlConnection");
                 if (_MysqlConnectionString.IsNull())
                 {
-                    _MysqlConnectionString = "Server=localhost;database=crm;uid=root;pwd=xqpsy;";
+                    _MysqlConnectionString = "Server=localhost;database=crm;uid=root;pwd=123456;";
                 }
                 return _MysqlConnectionString;
             }

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lsc.Common", "lsc.Common\ls
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lsc.Bll", "lsc.Bll\lsc.Bll.csproj", "{8E4B5059-D9D7-47C7-9261-625AFA951A4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lsc.Spider", "lsc.Spider\lsc.Spider.csproj", "{7284EA75-F70D-4721-8719-EEFC06D193A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8E4B5059-D9D7-47C7-9261-625AFA951A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E4B5059-D9D7-47C7-9261-625AFA951A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E4B5059-D9D7-47C7-9261-625AFA951A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7284EA75-F70D-4721-8719-EEFC06D193A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7284EA75-F70D-4721-8719-EEFC06D193A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7284EA75-F70D-4721-8719-EEFC06D193A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7284EA75-F70D-4721-8719-EEFC06D193A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

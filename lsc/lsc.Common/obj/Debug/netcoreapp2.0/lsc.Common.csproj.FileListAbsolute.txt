@@ -25,3 +25,12 @@ D:\Code\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.AssemblyInfoInputs
 D:\Code\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.AssemblyInfo.cs
 D:\Code\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.dll
 D:\Code\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.pdb
+D:\gitCode\crm\lsc\lsc.Common\bin\Debug\netcoreapp2.0\lsc.Common.deps.json
+D:\gitCode\crm\lsc\lsc.Common\bin\Debug\netcoreapp2.0\lsc.Common.dll
+D:\gitCode\crm\lsc\lsc.Common\bin\Debug\netcoreapp2.0\lsc.Common.pdb
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.csprojAssemblyReference.cache
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.csproj.CoreCompileInputs.cache
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.AssemblyInfoInputs.cache
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.AssemblyInfo.cs
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.dll
+D:\gitCode\crm\lsc\lsc.Common\obj\Debug\netcoreapp2.0\lsc.Common.pdb
