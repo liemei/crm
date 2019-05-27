@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_3306
 Source Server Version : 50717
 Source Host           : localhost:3306
-Source Database       : bnuxq_crm
+Source Database       : crm
 
 Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-08-24 15:21:35
+Date: 2019-05-27 21:51:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3586,7 +3586,7 @@ CREATE TABLE `emailresourcess` (
   `SenderServerIp` varchar(64) DEFAULT NULL,
   `UserName` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of emailresourcess
@@ -3602,7 +3602,7 @@ CREATE TABLE `emailtemplates` (
   `EmailContent` text,
   `Title` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of emailtemplates
@@ -3628,7 +3628,7 @@ CREATE TABLE `entercustcontactss` (
   `Landline` varchar(32) DEFAULT NULL,
   `WeChart` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2090 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entercustcontactss
@@ -3669,7 +3669,7 @@ CREATE TABLE `entercustomers` (
   `Abbreviation` varchar(64) DEFAULT NULL,
   `Landline` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=65859 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65860 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entercustomers
@@ -3688,7 +3688,7 @@ CREATE TABLE `entercustphaselogs` (
   `UserID` int(11) NOT NULL,
   `UserName` longtext,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3641 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of entercustphaselogs
@@ -3765,7 +3765,7 @@ CREATE TABLE `receivedpaymentslogs` (
   `SalesProjectID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of receivedpaymentslogs
@@ -3790,7 +3790,7 @@ CREATE TABLE `salesprojects` (
   `ReceoverPay` double NOT NULL DEFAULT '0',
   `ReceoverPayTime` datetime(6) NOT NULL DEFAULT '0001-01-01 00:00:00.000000',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of salesprojects
@@ -3809,7 +3809,7 @@ CREATE TABLE `salesprojectstatelogs` (
   `UserID` int(11) NOT NULL,
   `UserName` longtext,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of salesprojectstatelogs
@@ -3829,7 +3829,7 @@ CREATE TABLE `sendemaillogs` (
   `Name` varchar(32) DEFAULT NULL,
   `SendEmailTaskId` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sendemaillogs
@@ -3845,7 +3845,7 @@ CREATE TABLE `sendemailtasks` (
   `EmailTempId` int(11) NOT NULL,
   `TaskName` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sendemailtasks
@@ -3860,7 +3860,7 @@ CREATE TABLE `targetemails` (
   `Email` varchar(64) DEFAULT NULL,
   `Name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2559 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of targetemails
@@ -3876,7 +3876,7 @@ CREATE TABLE `useraccounts` (
   `UserID` int(11) NOT NULL,
   `UserName` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of useraccounts
@@ -4017,7 +4017,7 @@ CREATE TABLE `users` (
   `UserName` varchar(32) DEFAULT NULL,
   `TargetAmt` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -4037,7 +4037,7 @@ CREATE TABLE `workplans` (
   `UserID` int(11) NOT NULL,
   `WorkPlanState` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of workplans
